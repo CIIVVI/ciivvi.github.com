@@ -59,10 +59,10 @@
 					
 					<li>
  					
-					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" autocomplete="off" name="q" maxlength="20" placeholder="Search" />
-					</form>
+						<form class="search">
+							<label>Search</label>
+						<input type="text" id="ts-search-input" name="q" size="30" placeholder="Search"><br>
+						</form>
 					
 					</li>
 				</ul>
@@ -78,20 +78,35 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/16/fdsa/" title="fdsdsfa" itemprop="url">fdsdsfa</a>
+      <a href="/2015/05/16/Binary-Tree-Inorder-Traversal/" title="Binary Tree Inorder Traversal" itemprop="url">Binary Tree Inorder Traversal</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-16T21:01:18.000Z" itemprop="datePublished"> Published 2015-05-16</time>
+    <time datetime="2015-05-16T23:43:23.000Z" itemprop="datePublished"> Published 2015-05-16</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        
+        <p><a href="https://leetcode.com/problems/binary-tree-inorder-traversal/" target="_blank" rel="external">Leetcode</a></p>
+<p>```cpp<br>  vector<int> inorderTraversal(TreeNode<em> root) {<br>        vector<int> inorder;<br>        if (!root) return inorder;<br>        stack&lt;TreeNode </int></em>&gt; st;<br>        TreeNode *node = root;</int></p>
+<pre><code>    <span class="keyword">while</span> (node || !st.empty()) {
+        <span class="keyword">if</span> (node) { <span class="regexp">//</span> <span class="keyword">push</span> current then <span class="keyword">push</span> left
+            st.<span class="keyword">push</span>(node); 
+            node = node-&gt;left;
+        } <span class="keyword">else</span> { <span class="regexp">//</span> <span class="keyword">pop</span> current then <span class="keyword">push</span> right
+            node = st.top();
+            st.<span class="keyword">pop</span>();
+            inorder.push_back(node-&gt;val);
+            node = node-&gt;right;
+        }
+    }
+    <span class="keyword">return</span> inorder;
+}
+</code></pre>
         
         
         <p class="article-more-link">
@@ -102,63 +117,10 @@
 <div class="article-catetags">
 
 
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/16/hello-world/" title="Hello World" itemprop="url">Hello World</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-16T20:36:51.000Z" itemprop="datePublished"> Published 2015-05-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/binary-tree/">binary tree</a>
+  </div>
 
 </div>
 
@@ -190,6 +152,17 @@
   
 
   
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/binary-tree/" title="binary tree">binary tree<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
 
   <div class="linkslist">
   <p class="asidetitle">Links</p>
@@ -369,6 +342,23 @@ $(document).ready(function(){
 <!-- MathJax End -->
 
 <!-- Tiny_search Begin -->
+
+<script>
+var option = {
+  engineKey: '612b9cc918fbadff6049'
+};
+(function(w,d,t,u,n,s,e){
+  s = d.createElement(t);
+  s.src = u;
+  s.async = 1;
+  w[n] = function(r){
+    w[n].opts = r;
+  };
+  e = d.getElementsByTagName(t)[0];
+  e.parentNode.insertBefore(s, e);
+})(window,document,'script','//tinysou-cdn.b0.upaiyun.com/ts.js','_ts');
+_ts(option);
+</script>
 
 <!-- Tiny_search End -->
 
