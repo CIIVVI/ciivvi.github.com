@@ -4,25 +4,31 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>binary-tree-maximum-path-sum | Programming Exercise</title>
+    <title>edit-distance | Programming Exercise</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Cheng">
     
 
     
-    <meta name="description" content="Leetcode
-1234567891011121314151617int getPathSum(TreeNode *root, int &amp;amp;maxPath) &amp;#123;    // case 1: max path go through root    //         need to record &apos;single path&apos; start from root-&amp;gt;left (ri">
+    <meta name="description" content="Lintcode
+
+Time: $O(M\times N)$. Space: $O(M\times N)$.
+12345678910111213141516int minDistance(string word1, string word2) &amp;#123;    // f[i][j]: edit dist between word1.substr(0,i) and word2.substr(0,j">
 <meta property="og:type" content="article">
-<meta property="og:title" content="binary-tree-maximum-path-sum">
-<meta property="og:url" content="/2015/05/16/binary-tree-maximum-path-sum/index.html">
+<meta property="og:title" content="edit-distance">
+<meta property="og:url" content="/2015/05/17/edit-distance/index.html">
 <meta property="og:site_name" content="Programming Exercise">
-<meta property="og:description" content="Leetcode
-1234567891011121314151617int getPathSum(TreeNode *root, int &amp;amp;maxPath) &amp;#123;    // case 1: max path go through root    //         need to record &apos;single path&apos; start from root-&amp;gt;left (ri">
+<meta property="og:description" content="Lintcode
+
+Time: $O(M\times N)$. Space: $O(M\times N)$.
+12345678910111213141516int minDistance(string word1, string word2) &amp;#123;    // f[i][j]: edit dist between word1.substr(0,i) and word2.substr(0,j">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="binary-tree-maximum-path-sum">
-<meta name="twitter:description" content="Leetcode
-1234567891011121314151617int getPathSum(TreeNode *root, int &amp;amp;maxPath) &amp;#123;    // case 1: max path go through root    //         need to record &apos;single path&apos; start from root-&amp;gt;left (ri">
+<meta name="twitter:title" content="edit-distance">
+<meta name="twitter:description" content="Lintcode
+
+Time: $O(M\times N)$. Space: $O(M\times N)$.
+12345678910111213141516int minDistance(string word1, string word2) &amp;#123;    // f[i][j]: edit dist between word1.substr(0,i) and word2.substr(0,j">
 
     
     <link rel="alternative" href="/atom.xml" title="Programming Exercise" type="application/atom+xml">
@@ -79,14 +85,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/16/binary-tree-maximum-path-sum/" title="binary-tree-maximum-path-sum" itemprop="url">binary-tree-maximum-path-sum</a>
+      <a href="/2015/05/17/edit-distance/" title="edit-distance" itemprop="url">edit-distance</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-17T01:32:32.000Z" itemprop="datePublished"> Published 2015-05-16</time>
+    <time datetime="2015-05-17T04:49:16.000Z" itemprop="datePublished"> Published 2015-05-17</time>
     
   </p>
 </header>
@@ -99,8 +105,15 @@
 		
 		</div>
 		
-		<p><a href="https://leetcode.com/problems/binary-tree-maximum-path-sum/" target="_blank" rel="external">Leetcode</a></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getPathSum</span><span class="params">(TreeNode *root, <span class="keyword">int</span> &amp;maxPath)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// case 1: max path go through root</span></span><br><span class="line">    <span class="comment">//         need to record 'single path' start from root-&gt;left (right), may be empty path</span></span><br><span class="line">    <span class="comment">// case 2: max path in left (right) subtree</span></span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> sumLeft = getPathSum(root-&gt;left, maxPath);</span><br><span class="line">    <span class="keyword">int</span> sumRight = getPathSum(root-&gt;right, maxPath);</span><br><span class="line">    maxPath = max(maxPath, sumLeft + sumRight + root-&gt;val);</span><br><span class="line">    <span class="keyword">return</span> max(max(sumLeft, sumRight) + root-&gt;val, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxPathSum</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> maxPath = INT_MIN;</span><br><span class="line">    getPathSum(root, maxPath);</span><br><span class="line">    <span class="keyword">return</span> maxPath;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+		<p><a href="http://www.lintcode.com/en/problem/edit-distance/" target="_blank" rel="external">Lintcode</a></p>
+<ul>
+<li><p>Time: $O(M\times N)$. Space: $O(M\times N)$.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(<span class="built_in">string</span> word1, <span class="built_in">string</span> word2)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: edit dist between word1.substr(0,i) and word2.substr(0,j)</span></span><br><span class="line">    <span class="keyword">int</span> M = word1.length(), N = word2.length();</span><br><span class="line">    <span class="keyword">if</span> (M == <span class="number">0</span> || N == <span class="number">0</span>) <span class="keyword">return</span> max(M, N);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(M+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(N+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= M; i++) f[i][<span class="number">0</span>] = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= N; j++) f[<span class="number">0</span>][j] = j;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++) </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">            <span class="keyword">if</span> (word1[i-<span class="number">1</span>] == word2[j-<span class="number">1</span>])</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j-<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                f[i][j] = min(min(f[i-<span class="number">1</span>][j], f[i][j-<span class="number">1</span>]), f[i-<span class="number">1</span>][j-<span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> f[M][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Time: $O(M\times N)$. Space: $O(N)$.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(<span class="built_in">string</span> word1, <span class="built_in">string</span> word2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> M = word1.length(), N = word2.length();</span><br><span class="line">    <span class="keyword">if</span> (M == <span class="number">0</span> || N == <span class="number">0</span>) <span class="keyword">return</span> max(M, N);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(N+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= N; j++) f[<span class="number">0</span>][j] = j;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++) &#123;</span><br><span class="line">        f[i % <span class="number">2</span>][<span class="number">0</span>] = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">            <span class="keyword">if</span> (word1[i-<span class="number">1</span>] == word2[j-<span class="number">1</span>])</span><br><span class="line">                f[i % <span class="number">2</span>][j] = f[(i-<span class="number">1</span>) % <span class="number">2</span>][j-<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                f[i % <span class="number">2</span>][j] = min(f[(i-<span class="number">1</span>) %<span class="number">2</span>][j-<span class="number">1</span>], </span><br><span class="line">                min(f[(i-<span class="number">1</span>) % <span class="number">2</span>][j], f[i % <span class="number">2</span>][j-<span class="number">1</span>])) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[M % <span class="number">2</span>][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -109,7 +122,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/binary-tree/">binary tree</a><a href="/tags/easy/">easy</a>
+  <span></span> <a href="/tags/dynamic-programming/">dynamic programming</a><a href="/tags/medium/">medium</a><a href="/tags/sliding-window/">sliding window</a>
   </div>
 
 </div>
@@ -118,7 +131,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/2015/05/16/binary-tree-maximum-path-sum/" data-title="binary-tree-maximum-path-sum | Programming Exercise" data-tsina="null" class="share clearfix">
+	  <div data-url="/2015/05/17/edit-distance/" data-title="edit-distance | Programming Exercise" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -132,18 +145,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/05/16/distinct-subsequences/" title="distinct-subsequences">
+ <a href="/2015/05/17/Interleaving-String/" title="Interleaving String">
   <strong>上一篇：</strong><br/>
   <span>
-  distinct-subsequences</span>
+  Interleaving String</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/05/16/Balanced-Binary-Tree/"  title="Balanced Binary Tree">
+<a href="/2015/05/17/longest-common-substring/"  title="longest-common-substring">
  <strong>下一篇：</strong><br/> 
- <span>Balanced Binary Tree
+ <span>longest-common-substring
 </span>
 </a>
 </div>
