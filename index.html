@@ -78,57 +78,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/16/Binary-Tree-Preorder-Traversal/" title="Binary Tree Preorder Traversal" itemprop="url">Binary Tree Preorder Traversal</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-17T00:41:48.000Z" itemprop="datePublished"> Published 2015-05-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="https://leetcode.com/problems/binary-tree-preorder-traversal/" target="_blank" rel="external">Leetcode</a></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorderTraversal(TreeNode* root) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorder;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> preorder;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode *&gt; st;</span><br><span class="line">    st.push(root);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (!st.empty()) &#123;</span><br><span class="line">        root = st.top();</span><br><span class="line">        st.pop();</span><br><span class="line">        preorder.push_back(root-&gt;val);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right) st.push(root-&gt;right);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left) st.push(root-&gt;left);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> preorder;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2015/05/16/Binary-Tree-Inorder-Traversal/" title="Binary Tree Inorder Traversal" itemprop="url">Binary Tree Inorder Traversal</a>
   </h1>
   <p class="article-author">By
