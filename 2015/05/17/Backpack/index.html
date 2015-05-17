@@ -13,19 +13,19 @@
     
     <meta name="description" content="Lintcode
 
-Time: $O(M\times N)$. Space: $O(N)$.1234567891011121314151617int backPack(int m, vector&amp;lt;int&amp;gt; A) &amp;#123;    // f[i][j]: pick from first i items, can the sum be j    int n = A.size();">
+Time: $O(MN)$. Space: $O(N)$.123456789101112131415int backPack(int m, vector&amp;lt;int&amp;gt; A) &amp;#123;    // f[i][j]: pick (some) from first i items, can sum up to j    int n = A.size();    vecto">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Backpack">
 <meta property="og:url" content="/2015/05/17/Backpack/index.html">
 <meta property="og:site_name" content="Programming Exercise">
 <meta property="og:description" content="Lintcode
 
-Time: $O(M\times N)$. Space: $O(N)$.1234567891011121314151617int backPack(int m, vector&amp;lt;int&amp;gt; A) &amp;#123;    // f[i][j]: pick from first i items, can the sum be j    int n = A.size();">
+Time: $O(MN)$. Space: $O(N)$.123456789101112131415int backPack(int m, vector&amp;lt;int&amp;gt; A) &amp;#123;    // f[i][j]: pick (some) from first i items, can sum up to j    int n = A.size();    vecto">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Backpack">
 <meta name="twitter:description" content="Lintcode
 
-Time: $O(M\times N)$. Space: $O(N)$.1234567891011121314151617int backPack(int m, vector&amp;lt;int&amp;gt; A) &amp;#123;    // f[i][j]: pick from first i items, can the sum be j    int n = A.size();">
+Time: $O(MN)$. Space: $O(N)$.123456789101112131415int backPack(int m, vector&amp;lt;int&amp;gt; A) &amp;#123;    // f[i][j]: pick (some) from first i items, can sum up to j    int n = A.size();    vecto">
 
     
     <link rel="alternative" href="/atom.xml" title="Programming Exercise" type="application/atom+xml">
@@ -104,7 +104,7 @@ Time: $O(M\times N)$. Space: $O(N)$.1234567891011121314151617int backPack(int m,
 		
 		<p><a href="http://www.lintcode.com/en/problem/backpack/#" target="_blank" rel="external">Lintcode</a></p>
 <ul>
-<li>Time: $O(M\times N)$. Space: $O(N)$.<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">backPack</span><span class="params">(<span class="keyword">int</span> m, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: pick from first i items, can the sum be j</span></span><br><span class="line">    <span class="keyword">int</span> n = A.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(m + <span class="number">1</span>, <span class="keyword">false</span>));</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        f[i % <span class="number">2</span>][<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            f[i % <span class="number">2</span>][j] = (f[(i-<span class="number">1</span>) % <span class="number">2</span>][j] </span><br><span class="line">            || (j &gt;= A[i-<span class="number">1</span>] &amp;&amp; f[(i-<span class="number">1</span>) % <span class="number">2</span>][j - A[i-<span class="number">1</span>]]));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">        <span class="keyword">if</span> (f[n % <span class="number">2</span>][j]) <span class="keyword">return</span> j;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Time: $O(MN)$. Space: $O(N)$.<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">backPack</span><span class="params">(<span class="keyword">int</span> m, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: pick (some) from first i items, can sum up to j</span></span><br><span class="line">    <span class="keyword">int</span> n = A.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(m + <span class="number">1</span>, <span class="keyword">false</span>));</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        f[i % <span class="number">2</span>][<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">            f[i % <span class="number">2</span>][j] = (f[(i-<span class="number">1</span>) % <span class="number">2</span>][j] </span><br><span class="line">            || (j &gt;= A[i-<span class="number">1</span>] &amp;&amp; f[(i-<span class="number">1</span>) % <span class="number">2</span>][j - A[i-<span class="number">1</span>]]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">        <span class="keyword">if</span> (f[n % <span class="number">2</span>][j]) <span class="keyword">return</span> j;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
   
 	</div>
@@ -136,6 +136,14 @@ Time: $O(M\times N)$. Space: $O(N)$.1234567891011121314151617int backPack(int m,
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2015/05/17/backpack-ii/" title="backpack-ii">
+  <strong>上一篇：</strong><br/>
+  <span>
+  backpack-ii</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2015/05/17/Interleaving-String/"  title="Interleaving String">
@@ -171,23 +179,23 @@ Time: $O(M\times N)$. Space: $O(N)$.1234567891011121314151617int backPack(int m,
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/dynamic-programming/" title="dynamic programming">dynamic programming<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/medium/" title="medium">medium<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sliding-window/" title="sliding window">sliding window<sup>5</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/binary-tree/" title="binary tree">binary tree<sup>5</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/easy/" title="easy">easy<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/dynamic-programming/" title="dynamic programming">dynamic programming<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/medium/" title="medium">medium<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sliding-window/" title="sliding window">sliding window<sup>4</sup></a></li>
 			
 		
 		</ul>

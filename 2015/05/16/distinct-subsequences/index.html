@@ -13,22 +13,22 @@
     
     <meta name="description" content="Lintcode
 
-Time: $O(M\times N)$. Space: $O(M\times N)$.
-12345678910111213141516171819int numDistinct(string &amp;amp;s, string &amp;amp;t) &amp;#123;    // f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i">
+Time: $O(MN)$. Space: $O(MN)$.
+12345678910111213141516171819int numDistinct(string &amp;amp;s, string &amp;amp;t) &amp;#123;    // f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)    // f[i][0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="distinct-subsequences">
 <meta property="og:url" content="/2015/05/16/distinct-subsequences/index.html">
 <meta property="og:site_name" content="Programming Exercise">
 <meta property="og:description" content="Lintcode
 
-Time: $O(M\times N)$. Space: $O(M\times N)$.
-12345678910111213141516171819int numDistinct(string &amp;amp;s, string &amp;amp;t) &amp;#123;    // f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i">
+Time: $O(MN)$. Space: $O(MN)$.
+12345678910111213141516171819int numDistinct(string &amp;amp;s, string &amp;amp;t) &amp;#123;    // f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)    // f[i][0">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="distinct-subsequences">
 <meta name="twitter:description" content="Lintcode
 
-Time: $O(M\times N)$. Space: $O(M\times N)$.
-12345678910111213141516171819int numDistinct(string &amp;amp;s, string &amp;amp;t) &amp;#123;    // f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i">
+Time: $O(MN)$. Space: $O(MN)$.
+12345678910111213141516171819int numDistinct(string &amp;amp;s, string &amp;amp;t) &amp;#123;    // f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)    // f[i][0">
 
     
     <link rel="alternative" href="/atom.xml" title="Programming Exercise" type="application/atom+xml">
@@ -107,10 +107,10 @@ Time: $O(M\times N)$. Space: $O(M\times N)$.
 		
 		<p><a href="http://www.lintcode.com/en/problem/distinct-subsequences/" target="_blank" rel="external">Lintcode</a></p>
 <ul>
-<li><p>Time: $O(M\times N)$. Space: $O(M\times N)$.</p>
+<li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="built_in">string</span> &amp;s, <span class="built_in">string</span> &amp;t)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)</span></span><br><span class="line">    <span class="comment">// f[i][0]: # choice picking "" from s.substr(0,i)</span></span><br><span class="line">    <span class="comment">// f[0][j]: # choice picking s.substr(0,j) from ""</span></span><br><span class="line">    <span class="keyword">int</span> M = s.length(), N = t.length();</span><br><span class="line">    <span class="keyword">if</span> (M &lt; N) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(M+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; (N+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= M; i++) </span><br><span class="line">        f[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i-<span class="number">1</span>] == t[j-<span class="number">1</span>]) &#123;</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j-<span class="number">1</span>] + f[i-<span class="number">1</span>][j];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> f[M][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Time: $O(M\times N)$. Space: $O(N)$.</p>
+<li><p>Time: $O(MN)$. Space: $O(N)$.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="built_in">string</span> &amp;s, <span class="built_in">string</span> &amp;t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> M = s.length(), N = t.length();</span><br><span class="line">    <span class="keyword">if</span> (M &lt; N) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; f(N + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = N; N &gt;= <span class="number">1</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i-<span class="number">1</span>] == t[j-<span class="number">1</span>])</span><br><span class="line">                f[j] += f[j-<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> f[N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -187,23 +187,23 @@ Time: $O(M\times N)$. Space: $O(M\times N)$.
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/dynamic-programming/" title="dynamic programming">dynamic programming<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/medium/" title="medium">medium<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sliding-window/" title="sliding window">sliding window<sup>5</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/binary-tree/" title="binary tree">binary tree<sup>5</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/easy/" title="easy">easy<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/dynamic-programming/" title="dynamic programming">dynamic programming<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/medium/" title="medium">medium<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sliding-window/" title="sliding window">sliding window<sup>4</sup></a></li>
 			
 		
 		</ul>

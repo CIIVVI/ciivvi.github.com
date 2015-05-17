@@ -78,6 +78,116 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/05/17/k-Sum/" title="k Sum" itemprop="url">k Sum</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-17T17:21:10.000Z" itemprop="datePublished"> Published 2015-05-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><a href="http://www.lintcode.com/en/problem/k-sum/" target="_blank" rel="external">Lintcode</a></p>
+<ul>
+<li>Time: $O(NKT)$. Space: $O(NKT)$.<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A, <span class="keyword">int</span> k, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j][t]: # solutions picking j from first i numbers</span></span><br><span class="line">    <span class="comment">// that sum up to t</span></span><br><span class="line">    <span class="keyword">int</span> n = A.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&gt; f(n + <span class="number">1</span>, </span><br><span class="line">           <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;(k + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; (target + <span class="number">1</span>, <span class="number">0</span>)));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</span><br><span class="line">        f[i][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= k &amp;&amp; j &lt;= i; j++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">0</span>; t &lt;= target; t++) &#123;</span><br><span class="line">                f[i][j][t] = f[i-<span class="number">1</span>][j][t];</span><br><span class="line">                <span class="keyword">if</span> (t &gt;= A[i-<span class="number">1</span>])</span><br><span class="line">                    f[i][j][t] += f[i-<span class="number">1</span>][j-<span class="number">1</span>][t-A[i-<span class="number">1</span>]];</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[n][k][target];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/17/backpack-ii/" title="backpack-ii" itemprop="url">backpack-ii</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-17T16:08:24.000Z" itemprop="datePublished"> Published 2015-05-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><a href="http://www.lintcode.com/en/problem/backpack-ii/" target="_blank" rel="external">Lintcode</a></p>
+<ul>
+<li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">backPackII</span><span class="params">(<span class="keyword">int</span> m, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; V)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]:pick (some of) first i items </span></span><br><span class="line">    <span class="comment">// which size sums up to j, record max value</span></span><br><span class="line">    <span class="keyword">int</span> n = A.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(n + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(m + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">int</span> maxVal = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            f[i][j] = f[i-<span class="number">1</span>][j];</span><br><span class="line">            <span class="keyword">if</span> (j &gt;= A[i-<span class="number">1</span>]) </span><br><span class="line">                f[i][j] = max(f[i][j], f[i-<span class="number">1</span>][j-A[i-<span class="number">1</span>]] + V[i-<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">if</span> (f[i][j] &gt; maxVal)</span><br><span class="line">                maxVal = f[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> maxVal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Time: $O(MN)$. Space: $O(N)$.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">backPackII</span><span class="params">(<span class="keyword">int</span> m, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; V)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = A.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; f(m + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> maxVal = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (j &gt;= A[i-<span class="number">1</span>]) </span><br><span class="line">                f[j] = max(f[j], f[j-A[i-<span class="number">1</span>]] + V[i-<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">if</span> (f[j] &gt; maxVal)</span><br><span class="line">                maxVal = f[j];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> maxVal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/05/17/Backpack/" title="Backpack" itemprop="url">Backpack</a>
   </h1>
   <p class="article-author">By
@@ -93,7 +203,7 @@
         
         <p><a href="http://www.lintcode.com/en/problem/backpack/#" target="_blank" rel="external">Lintcode</a></p>
 <ul>
-<li>Time: $O(M\times N)$. Space: $O(N)$.<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">backPack</span><span class="params">(<span class="keyword">int</span> m, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: pick from first i items, can the sum be j</span></span><br><span class="line">    <span class="keyword">int</span> n = A.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(m + <span class="number">1</span>, <span class="keyword">false</span>));</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        f[i % <span class="number">2</span>][<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            f[i % <span class="number">2</span>][j] = (f[(i-<span class="number">1</span>) % <span class="number">2</span>][j] </span><br><span class="line">            || (j &gt;= A[i-<span class="number">1</span>] &amp;&amp; f[(i-<span class="number">1</span>) % <span class="number">2</span>][j - A[i-<span class="number">1</span>]]));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">        <span class="keyword">if</span> (f[n % <span class="number">2</span>][j]) <span class="keyword">return</span> j;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Time: $O(MN)$. Space: $O(N)$.<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">backPack</span><span class="params">(<span class="keyword">int</span> m, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: pick (some) from first i items, can sum up to j</span></span><br><span class="line">    <span class="keyword">int</span> n = A.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(m + <span class="number">1</span>, <span class="keyword">false</span>));</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        f[i % <span class="number">2</span>][<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">            f[i % <span class="number">2</span>][j] = (f[(i-<span class="number">1</span>) % <span class="number">2</span>][j] </span><br><span class="line">            || (j &gt;= A[i-<span class="number">1</span>] &amp;&amp; f[(i-<span class="number">1</span>) % <span class="number">2</span>][j - A[i-<span class="number">1</span>]]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">        <span class="keyword">if</span> (f[n % <span class="number">2</span>][j]) <span class="keyword">return</span> j;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 
         
@@ -151,10 +261,10 @@
         
         <p><a href="https://leetcode.com/problems/interleaving-string/" target="_blank" rel="external">Leetcode</a></p>
 <ul>
-<li><p>Time: $O(M\times N)$. Space: $O(M\times N)$.</p>
+<li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isInterleave</span><span class="params">(<span class="built_in">string</span> s1, <span class="built_in">string</span> s2, <span class="built_in">string</span> s3)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: s3.substr(0,i+j) is interleaving of s1.substr(0,i) and s2.substr(0,j)</span></span><br><span class="line">    <span class="keyword">int</span> M = s1.length(), N = s2.length();</span><br><span class="line">    <span class="keyword">if</span> ((M + N) != s3.length()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&gt; f(M + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;(N + <span class="number">1</span>, <span class="keyword">false</span>));</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= N; j++) </span><br><span class="line">            <span class="keyword">if</span> ((i &gt; <span class="number">0</span> &amp;&amp; s1[i-<span class="number">1</span>] == s3[i+j-<span class="number">1</span>] &amp;&amp; f[i-<span class="number">1</span>][j])</span><br><span class="line">             || (j &gt; <span class="number">0</span> &amp;&amp; s2[j-<span class="number">1</span>] == s3[i+j-<span class="number">1</span>] &amp;&amp; f[i][j-<span class="number">1</span>]))</span><br><span class="line">                f[i][j] = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">return</span> f[M][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Time: $O(M\times N)$. Space: $O(N)$.</p>
+<li><p>Time: $O(MN)$. Space: $O(N)$.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isInterleave</span><span class="params">(<span class="built_in">string</span> s1, <span class="built_in">string</span> s2, <span class="built_in">string</span> s3)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: s3.substr(0,i+j) is interleaving of s1.substr(0,i) and s2.substr(0,j)</span></span><br><span class="line">    <span class="keyword">int</span> M = s1.length(), N = s2.length();</span><br><span class="line">    <span class="keyword">if</span> ((M + N) != s3.length()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; pre(N + <span class="number">1</span>, <span class="keyword">false</span>), cur(N + <span class="number">1</span>, <span class="keyword">false</span>);</span><br><span class="line">    pre[<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">        pre[j] = (s2[j-<span class="number">1</span>] == s3[j-<span class="number">1</span>]) &amp;&amp; pre[j-<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++) &#123;</span><br><span class="line">        cur[<span class="number">0</span>] = (s1[i-<span class="number">1</span>] == s3[i-<span class="number">1</span>]) &amp;&amp; pre[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">            cur[j] = (s1[i-<span class="number">1</span>] == s3[i+j-<span class="number">1</span>] &amp;&amp; pre[j])</span><br><span class="line">                  || (s2[j-<span class="number">1</span>] == s3[i+j-<span class="number">1</span>] &amp;&amp; cur[j-<span class="number">1</span>]);</span><br><span class="line">        swap(pre, cur);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pre[N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 
@@ -167,6 +277,11 @@
     <footer class="article-footer clearfix">
 <div class="article-catetags">
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/dynamic-programming/">dynamic programming</a><a href="/tags/medium/">medium</a><a href="/tags/sliding-window/">sliding window</a>
+  </div>
 
 </div>
 
@@ -208,10 +323,10 @@
         
         <p><a href="http://www.lintcode.com/en/problem/edit-distance/" target="_blank" rel="external">Lintcode</a></p>
 <ul>
-<li><p>Time: $O(M\times N)$. Space: $O(M\times N)$.</p>
+<li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(<span class="built_in">string</span> word1, <span class="built_in">string</span> word2)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: edit dist between word1.substr(0,i) and word2.substr(0,j)</span></span><br><span class="line">    <span class="keyword">int</span> M = word1.length(), N = word2.length();</span><br><span class="line">    <span class="keyword">if</span> (M == <span class="number">0</span> || N == <span class="number">0</span>) <span class="keyword">return</span> max(M, N);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(M+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(N+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= M; i++) f[i][<span class="number">0</span>] = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= N; j++) f[<span class="number">0</span>][j] = j;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++) </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">            <span class="keyword">if</span> (word1[i-<span class="number">1</span>] == word2[j-<span class="number">1</span>])</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j-<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                f[i][j] = min(min(f[i-<span class="number">1</span>][j], f[i][j-<span class="number">1</span>]), f[i-<span class="number">1</span>][j-<span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> f[M][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Time: $O(M\times N)$. Space: $O(N)$.</p>
+<li><p>Time: $O(MN)$. Space: $O(N)$.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(<span class="built_in">string</span> word1, <span class="built_in">string</span> word2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> M = word1.length(), N = word2.length();</span><br><span class="line">    <span class="keyword">if</span> (M == <span class="number">0</span> || N == <span class="number">0</span>) <span class="keyword">return</span> max(M, N);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(N+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= N; j++) f[<span class="number">0</span>][j] = j;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++) &#123;</span><br><span class="line">        f[i % <span class="number">2</span>][<span class="number">0</span>] = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">            <span class="keyword">if</span> (word1[i-<span class="number">1</span>] == word2[j-<span class="number">1</span>])</span><br><span class="line">                f[i % <span class="number">2</span>][j] = f[(i-<span class="number">1</span>) % <span class="number">2</span>][j-<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                f[i % <span class="number">2</span>][j] = min(f[(i-<span class="number">1</span>) %<span class="number">2</span>][j-<span class="number">1</span>], </span><br><span class="line">                min(f[(i-<span class="number">1</span>) % <span class="number">2</span>][j], f[i % <span class="number">2</span>][j-<span class="number">1</span>])) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[M % <span class="number">2</span>][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -271,10 +386,10 @@
         
         <p><a href="http://www.lintcode.com/en/problem/longest-common-substring/" target="_blank" rel="external">Lintcode</a></p>
 <ul>
-<li><p>Time: $O(M\times N)$. Space: $O(M\times N)$.</p>
+<li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubstring</span><span class="params">(<span class="built_in">string</span> &amp;A, <span class="built_in">string</span> &amp;B)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: longest common substring of A[?..i+1] and B[?..j+1]</span></span><br><span class="line">    <span class="keyword">int</span> M = A.length(), N = B.length();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(M+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; (N+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">int</span> maxLen = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++) </span><br><span class="line">            <span class="keyword">if</span> (A[i-<span class="number">1</span>] == B[j-<span class="number">1</span>]) &#123;</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (f[i][j] &gt; maxLen) maxLen = f[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLen;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Time: $O(M\times N)$. Space: $O(N)$.</p>
+<li><p>Time: $O(MN)$. Space: $O(N)$.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubstring</span><span class="params">(<span class="built_in">string</span> &amp;A, <span class="built_in">string</span> &amp;B)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> M = A.length(), N = B.length();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; f(N+<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> maxLen = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = N; j &gt;= <span class="number">1</span>; j--) &#123;</span><br><span class="line">            f[j] = A[i-<span class="number">1</span>] == B[j-<span class="number">1</span>] ? f[j-<span class="number">1</span>] + <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (f[j] &gt; maxLen) maxLen = f[j];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLen;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -334,10 +449,10 @@
         
         <p><a href="http://www.lintcode.com/en/problem/distinct-subsequences/" target="_blank" rel="external">Lintcode</a></p>
 <ul>
-<li><p>Time: $O(M\times N)$. Space: $O(M\times N)$.</p>
+<li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="built_in">string</span> &amp;s, <span class="built_in">string</span> &amp;t)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)</span></span><br><span class="line">    <span class="comment">// f[i][0]: # choice picking "" from s.substr(0,i)</span></span><br><span class="line">    <span class="comment">// f[0][j]: # choice picking s.substr(0,j) from ""</span></span><br><span class="line">    <span class="keyword">int</span> M = s.length(), N = t.length();</span><br><span class="line">    <span class="keyword">if</span> (M &lt; N) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(M+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; (N+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= M; i++) </span><br><span class="line">        f[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i-<span class="number">1</span>] == t[j-<span class="number">1</span>]) &#123;</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j-<span class="number">1</span>] + f[i-<span class="number">1</span>][j];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> f[M][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Time: $O(M\times N)$. Space: $O(N)$.</p>
+<li><p>Time: $O(MN)$. Space: $O(N)$.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="built_in">string</span> &amp;s, <span class="built_in">string</span> &amp;t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> M = s.length(), N = t.length();</span><br><span class="line">    <span class="keyword">if</span> (M &lt; N) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; f(N + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = N; N &gt;= <span class="number">1</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i-<span class="number">1</span>] == t[j-<span class="number">1</span>])</span><br><span class="line">                f[j] += f[j-<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> f[N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -543,118 +658,10 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/16/Binary-Tree-Preorder-Traversal/" title="Binary Tree Preorder Traversal" itemprop="url">Binary Tree Preorder Traversal</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-17T00:41:48.000Z" itemprop="datePublished"> Published 2015-05-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="https://leetcode.com/problems/binary-tree-preorder-traversal/" target="_blank" rel="external">Leetcode</a></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorderTraversal(TreeNode* root) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorder;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> preorder;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode *&gt; st;</span><br><span class="line">    st.push(root);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (!st.empty()) &#123;</span><br><span class="line">        root = st.top();</span><br><span class="line">        st.pop();</span><br><span class="line">        preorder.push_back(root-&gt;val);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right) st.push(root-&gt;right);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left) st.push(root-&gt;left);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> preorder;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/binary-tree/">binary tree</a><a href="/tags/easy/">easy</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/16/Binary-Tree-Inorder-Traversal/" title="Binary Tree Inorder Traversal" itemprop="url">Binary Tree Inorder Traversal</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-16T23:43:23.000Z" itemprop="datePublished"> Published 2015-05-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="https://leetcode.com/problems/binary-tree-inorder-traversal/" target="_blank" rel="external">Leetcode</a></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; inorderTraversal(TreeNode* root) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; inorder;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> inorder;</span><br><span class="line">    TreeNode *node = root;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode *&gt; st;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (node || !st.empty()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (node) &#123; <span class="comment">// push current node before left child</span></span><br><span class="line">            st.push(node);</span><br><span class="line">            node = node-&gt;left;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// print parent before push right child</span></span><br><span class="line">            node = st.top();</span><br><span class="line">            st.pop();</span><br><span class="line">            inorder.push_back(node-&gt;val);</span><br><span class="line">            node = node-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> inorder;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/binary-tree/">binary tree</a><a href="/tags/easy/">easy</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
+  <nav id="page-nav" class="clearfix">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+  </nav>
 
 </div>
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
@@ -671,23 +678,23 @@
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/dynamic-programming/" title="dynamic programming">dynamic programming<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/medium/" title="medium">medium<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sliding-window/" title="sliding window">sliding window<sup>5</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/binary-tree/" title="binary tree">binary tree<sup>5</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/easy/" title="easy">easy<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/dynamic-programming/" title="dynamic programming">dynamic programming<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/medium/" title="medium">medium<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/sliding-window/" title="sliding window">sliding window<sup>4</sup></a></li>
 			
 		
 		</ul>
