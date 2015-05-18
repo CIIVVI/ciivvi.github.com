@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>longest-common-substring | Programming Exercise</title>
+    <title>Longest Common Subsequence | Programming Exercise</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Cheng">
@@ -14,21 +14,21 @@
     <meta name="description" content="Lintcode
 
 Time: $O(MN)$. Space: $O(MN)$.
-12345678910111213int longestCommonSubstring(string &amp;amp;A, string &amp;amp;B) &amp;#123;    // f[i][j]: length of longest common substring between A[?..i-1] and B[?..j">
+123456789101112int longestCommonSubsequence(string A, string B) &amp;#123;    // f[i][j]: length of LCS between A[?..i-1] and B[?..j-1]    int M = A.length(), N =">
 <meta property="og:type" content="article">
-<meta property="og:title" content="longest-common-substring">
-<meta property="og:url" content="/2015/05/17/longest-common-substring/index.html">
+<meta property="og:title" content="Longest Common Subsequence">
+<meta property="og:url" content="/2015/05/17/Longest-Common-Subsequence/index.html">
 <meta property="og:site_name" content="Programming Exercise">
 <meta property="og:description" content="Lintcode
 
 Time: $O(MN)$. Space: $O(MN)$.
-12345678910111213int longestCommonSubstring(string &amp;amp;A, string &amp;amp;B) &amp;#123;    // f[i][j]: length of longest common substring between A[?..i-1] and B[?..j">
+123456789101112int longestCommonSubsequence(string A, string B) &amp;#123;    // f[i][j]: length of LCS between A[?..i-1] and B[?..j-1]    int M = A.length(), N =">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="longest-common-substring">
+<meta name="twitter:title" content="Longest Common Subsequence">
 <meta name="twitter:description" content="Lintcode
 
 Time: $O(MN)$. Space: $O(MN)$.
-12345678910111213int longestCommonSubstring(string &amp;amp;A, string &amp;amp;B) &amp;#123;    // f[i][j]: length of longest common substring between A[?..i-1] and B[?..j">
+123456789101112int longestCommonSubsequence(string A, string B) &amp;#123;    // f[i][j]: length of LCS between A[?..i-1] and B[?..j-1]    int M = A.length(), N =">
 
     
     <link rel="alternative" href="/atom.xml" title="Programming Exercise" type="application/atom+xml">
@@ -85,14 +85,14 @@ Time: $O(MN)$. Space: $O(MN)$.
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/17/longest-common-substring/" title="longest-common-substring" itemprop="url">longest-common-substring</a>
+      <a href="/2015/05/17/Longest-Common-Subsequence/" title="Longest Common Subsequence" itemprop="url">Longest Common Subsequence</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-17T04:25:24.000Z" itemprop="datePublished"> Published 2015-05-17</time>
+    <time datetime="2015-05-17T21:18:56.000Z" itemprop="datePublished"> Published 2015-05-17</time>
     
   </p>
 </header>
@@ -105,14 +105,13 @@ Time: $O(MN)$. Space: $O(MN)$.
 		
 		</div>
 		
-		<p><a href="http://www.lintcode.com/en/problem/longest-common-substring/" target="_blank" rel="external">Lintcode</a></p>
+		<p><a href="http://www.lintcode.com/en/problem/longest-common-subsequence/" target="_blank" rel="external">Lintcode</a></p>
 <ul>
 <li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubstring</span><span class="params">(<span class="built_in">string</span> &amp;A, <span class="built_in">string</span> &amp;B)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: length of longest common substring between A[?..i-1] and B[?..j-1]</span></span><br><span class="line">    <span class="keyword">int</span> M = A.length(), N = B.length();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(M+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; (N+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">int</span> maxLen = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++) </span><br><span class="line">            <span class="keyword">if</span> (A[i-<span class="number">1</span>] == B[j-<span class="number">1</span>]) &#123;</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (f[i][j] &gt; maxLen) maxLen = f[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLen;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubsequence</span><span class="params">(<span class="built_in">string</span> A, <span class="built_in">string</span> B)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: length of LCS between A[?..i-1] and B[?..j-1]</span></span><br><span class="line">    <span class="keyword">int</span> M = A.length(), N = B.length();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(M + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(N + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++) </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">            <span class="keyword">if</span> (A[i-<span class="number">1</span>] == B[j-<span class="number">1</span>]) </span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                f[i][j] = max(f[i-<span class="number">1</span>][j], f[i][j-<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> f[M][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Time: $O(MN)$. Space: $O(N)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubstring</span><span class="params">(<span class="built_in">string</span> &amp;A, <span class="built_in">string</span> &amp;B)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> M = A.length(), N = B.length();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; f(N+<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> maxLen = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = N; j &gt;= <span class="number">1</span>; j--) &#123;</span><br><span class="line">            f[j] = A[i-<span class="number">1</span>] == B[j-<span class="number">1</span>] ? f[j-<span class="number">1</span>] + <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (f[j] &gt; maxLen) maxLen = f[j];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLen;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubsequence</span><span class="params">(<span class="built_in">string</span> A, <span class="built_in">string</span> B)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: length of LCS between A[?..i-1] and B[?..j-1]</span></span><br><span class="line">    <span class="keyword">int</span> M = A.length(), N = B.length();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(N + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++) </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">            <span class="keyword">if</span> (A[i-<span class="number">1</span>] == B[j-<span class="number">1</span>]) </span><br><span class="line">                f[i%<span class="number">2</span>][j] = f[(i-<span class="number">1</span>)%<span class="number">2</span>][j-<span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                f[i%<span class="number">2</span>][j] = max(f[(i-<span class="number">1</span>)%<span class="number">2</span>][j], f[i%<span class="number">2</span>][j-<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> f[M%<span class="number">2</span>][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
   
 	</div>
@@ -120,18 +119,13 @@ Time: $O(MN)$. Space: $O(MN)$.
 <div class="article-catetags">
 
 
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/dynamic-programming/">dynamic programming</a><a href="/tags/medium/">medium</a><a href="/tags/sliding-window/">sliding window</a>
-  </div>
-
 </div>
 
 
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/2015/05/17/longest-common-substring/" data-title="longest-common-substring | Programming Exercise" data-tsina="null" class="share clearfix">
+	  <div data-url="/2015/05/17/Longest-Common-Subsequence/" data-title="Longest Common Subsequence | Programming Exercise" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -145,18 +139,18 @@ Time: $O(MN)$. Space: $O(MN)$.
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/05/17/edit-distance/" title="edit-distance">
+ <a href="/2015/05/17/Minimum-Adjustment-Cost/" title="Minimum Adjustment Cost">
   <strong>上一篇：</strong><br/>
   <span>
-  edit-distance</span>
+  Minimum Adjustment Cost</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/05/16/distinct-subsequences/"  title="distinct-subsequences">
+<a href="/2015/05/17/k-Sum/"  title="k Sum">
  <strong>下一篇：</strong><br/> 
- <span>distinct-subsequences
+ <span>k Sum
 </span>
 </a>
 </div>
