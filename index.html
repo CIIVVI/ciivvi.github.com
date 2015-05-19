@@ -78,6 +78,61 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/05/19/blog-source-posts-3-way-quick-sort-md/" title="~/blog/source/_posts/3-way-quick-sort.md" itemprop="url">~/blog/source/_posts/3-way-quick-sort.md</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-19T04:27:17.000Z" itemprop="datePublished"> Published 2015-05-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>Time: average $O(N\log N}. Space: $O(\log N)$ for call stack.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pivot = A[start]</span></span><br><span class="line"><span class="comment">// index:   |start...lt-1|lt...cur-1|cur...gt-1|gt...end|</span></span><br><span class="line"><span class="comment">// compare: |      &lt;     |    ==    |   ?      |    &gt;   |</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quickSort3Way</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;A, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (start &gt;= end) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> pivot = A[start];</span><br><span class="line">    <span class="keyword">int</span> lt = start, gt = end, cur = start + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (cur &lt;= gt) &#123;</span><br><span class="line">        <span class="keyword">if</span> (A[cur] == pivot) cur++;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (A[cur] &lt; pivot) swap(A[cur++], A[lt++]);</span><br><span class="line">        <span class="keyword">else</span> swap(A[cur], A[gt--]);</span><br><span class="line">    &#125;</span><br><span class="line">    quickSort3Way(A, start, lt - <span class="number">1</span>);</span><br><span class="line">    quickSort3Way(A, gt + <span class="number">1</span>, end);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/sort/">sort</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/05/17/Subsets/" title="Subsets" itemprop="url">Subsets</a>
   </h1>
   <p class="article-author">By
@@ -91,8 +146,8 @@
 </header>
     <div class="article-content">
         
-        <p><a href="http://www.lintcode.com/en/problem/subsets/" target="_blank" rel="external">Lintcode</a><br>$\alpha$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; subsets(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums) &#123;</span><br><span class="line">    <span class="comment">// there are 2^N states, s = 0..2^N-1</span></span><br><span class="line">    <span class="comment">// ith bit of s == 1, add nums[i] to solution s</span></span><br><span class="line">    <span class="keyword">int</span> N = nums.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; sets(<span class="number">1</span> &lt;&lt; N);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> s : sets) s.reserve(N);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> s = <span class="number">0</span>; s &lt; (<span class="number">1</span> &lt;&lt; N); s++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">            <span class="keyword">if</span> ((s &gt;&gt; i) &amp; <span class="number">1</span>)</span><br><span class="line">                sets[s].push_back(nums[i]);</span><br><span class="line">    <span class="keyword">return</span> sets;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
+        <p><a href="http://www.lintcode.com/en/problem/subsets/" target="_blank" rel="external">Lintcode</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; subsets(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums) &#123;</span><br><span class="line">    <span class="comment">// there are 2^N states, s = 0..2^N-1</span></span><br><span class="line">    <span class="comment">// ith bit of s == 1, add nums[i] to solution s</span></span><br><span class="line">    <span class="keyword">int</span> N = nums.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; sets(<span class="number">1</span> &lt;&lt; N);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> s : sets) s.reserve(N);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> s = <span class="number">0</span>; s &lt; (<span class="number">1</span> &lt;&lt; N); s++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">            <span class="keyword">if</span> ((s &gt;&gt; i) &amp; <span class="number">1</span>)</span><br><span class="line">                sets[s].push_back(nums[i]);</span><br><span class="line">    <span class="keyword">return</span> sets;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
         
         <p class="article-more-link">
@@ -601,69 +656,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/16/distinct-subsequences/" title="distinct-subsequences" itemprop="url">distinct-subsequences</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-17T03:23:20.000Z" itemprop="datePublished"> Published 2015-05-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="http://www.lintcode.com/en/problem/distinct-subsequences/" target="_blank" rel="external">Lintcode</a></p>
-<ul>
-<li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="built_in">string</span> &amp;s, <span class="built_in">string</span> &amp;t)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)</span></span><br><span class="line">    <span class="comment">// f[i][0]: # choice picking "" from s.substr(0,i)</span></span><br><span class="line">    <span class="comment">// f[0][j]: # choice picking s.substr(0,j) from ""</span></span><br><span class="line">    <span class="keyword">int</span> M = s.length(), N = t.length();</span><br><span class="line">    <span class="keyword">if</span> (M &lt; N) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(M+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; (N+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= M; i++) </span><br><span class="line">        f[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i-<span class="number">1</span>] == t[j-<span class="number">1</span>]) &#123;</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j-<span class="number">1</span>] + f[i-<span class="number">1</span>][j];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> f[M][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Time: $O(MN)$. Space: $O(N)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="built_in">string</span> &amp;s, <span class="built_in">string</span> &amp;t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> M = s.length(), N = t.length();</span><br><span class="line">    <span class="keyword">if</span> (M &lt; N) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; f(N + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = N; N &gt;= <span class="number">1</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i-<span class="number">1</span>] == t[j-<span class="number">1</span>])</span><br><span class="line">                f[j] += f[j-<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> f[N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/dynamic-programming/">dynamic programming</a><a href="/tags/medium/">medium</a><a href="/tags/sliding-window/">sliding window</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -701,6 +693,10 @@
 		
 			
 				<li><a href="/tags/binary-tree/" title="binary tree">binary tree<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sort/" title="sort">sort<sup>1</sup></a></li>
 			
 		
 		</ul>
