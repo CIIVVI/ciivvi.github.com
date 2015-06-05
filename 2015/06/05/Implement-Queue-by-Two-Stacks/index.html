@@ -4,31 +4,52 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>distinct-subsequences | Programming Exercise</title>
+    <title>Implement Queue by Two Stacks | Programming Exercise</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Cheng">
     
 
     
-    <meta name="description" content="Lintcode
+    <meta name="description" content="Analysis:
 
-Time: $O(MN)$. Space: $O(MN)$.
-12345678910111213141516171819int numDistinct(string &amp;amp;s, string &amp;amp;t) &amp;#123;    // f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)    // f[i][0">
+queue: FIFO, stack: LIFO
+Start with a example: [S1: 1,2,3] [S2:] 
+pop, pull S1 to S2, [S1:][S2: 3,2,1] then pop S2.
+push 4, push to S1, [S1: 4][S2: 3,2]
+
+
+idea:
+push to S1, pop from S2
+pull">
 <meta property="og:type" content="article">
-<meta property="og:title" content="distinct-subsequences">
-<meta property="og:url" content="/2015/05/16/distinct-subsequences/index.html">
+<meta property="og:title" content="Implement Queue by Two Stacks">
+<meta property="og:url" content="/2015/06/05/Implement-Queue-by-Two-Stacks/index.html">
 <meta property="og:site_name" content="Programming Exercise">
-<meta property="og:description" content="Lintcode
+<meta property="og:description" content="Analysis:
 
-Time: $O(MN)$. Space: $O(MN)$.
-12345678910111213141516171819int numDistinct(string &amp;amp;s, string &amp;amp;t) &amp;#123;    // f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)    // f[i][0">
+queue: FIFO, stack: LIFO
+Start with a example: [S1: 1,2,3] [S2:] 
+pop, pull S1 to S2, [S1:][S2: 3,2,1] then pop S2.
+push 4, push to S1, [S1: 4][S2: 3,2]
+
+
+idea:
+push to S1, pop from S2
+pull">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="distinct-subsequences">
-<meta name="twitter:description" content="Lintcode
+<meta name="twitter:title" content="Implement Queue by Two Stacks">
+<meta name="twitter:description" content="Analysis:
 
-Time: $O(MN)$. Space: $O(MN)$.
-12345678910111213141516171819int numDistinct(string &amp;amp;s, string &amp;amp;t) &amp;#123;    // f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)    // f[i][0">
+queue: FIFO, stack: LIFO
+Start with a example: [S1: 1,2,3] [S2:] 
+pop, pull S1 to S2, [S1:][S2: 3,2,1] then pop S2.
+push 4, push to S1, [S1: 4][S2: 3,2]
+
+
+idea:
+push to S1, pop from S2
+pull">
 
     
     <link rel="alternative" href="/atom.xml" title="Programming Exercise" type="application/atom+xml">
@@ -85,14 +106,14 @@ Time: $O(MN)$. Space: $O(MN)$.
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/16/distinct-subsequences/" title="distinct-subsequences" itemprop="url">distinct-subsequences</a>
+      <a href="/2015/06/05/Implement-Queue-by-Two-Stacks/" title="Implement Queue by Two Stacks" itemprop="url">Implement Queue by Two Stacks</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-17T03:23:20.000Z" itemprop="datePublished"> Published 2015-05-16</time>
+    <time datetime="2015-06-05T17:09:52.000Z" itemprop="datePublished"> Published 2015-06-05</time>
     
   </p>
 </header>
@@ -105,25 +126,26 @@ Time: $O(MN)$. Space: $O(MN)$.
 		
 		</div>
 		
-		<p><a href="http://www.lintcode.com/en/problem/distinct-subsequences/" target="_blank" rel="external">Lintcode</a></p>
+		<p><strong>Analysis:</strong></p>
 <ul>
-<li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="built_in">string</span> &amp;s, <span class="built_in">string</span> &amp;t)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)</span></span><br><span class="line">    <span class="comment">// f[i][0]: # choice picking "" from s.substr(0,i)</span></span><br><span class="line">    <span class="comment">// f[0][j]: # choice picking s.substr(0,j) from ""</span></span><br><span class="line">    <span class="keyword">int</span> M = s.length(), N = t.length();</span><br><span class="line">    <span class="keyword">if</span> (M &lt; N) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(M+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; (N+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= M; i++) </span><br><span class="line">        f[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i-<span class="number">1</span>] == t[j-<span class="number">1</span>]) &#123;</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j-<span class="number">1</span>] + f[i-<span class="number">1</span>][j];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> f[M][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>queue: FIFO, stack: LIFO</li>
+<li>Start with a example: [S1: 1,2,3] [S2:] <ul>
+<li>pop, pull S1 to S2, [S1:][S2: 3,2,1] then pop S2.</li>
+<li>push 4, push to S1, [S1: 4][S2: 3,2]</li>
+</ul>
 </li>
-<li><p>Time: $O(MN)$. Space: $O(N)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="built_in">string</span> &amp;s, <span class="built_in">string</span> &amp;t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> M = s.length(), N = t.length();</span><br><span class="line">    <span class="keyword">if</span> (M &lt; N) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; f(N + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = N; N &gt;= <span class="number">1</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i-<span class="number">1</span>] == t[j-<span class="number">1</span>])</span><br><span class="line">                f[j] += f[j-<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> f[N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>idea:<ul>
+<li>push to S1, pop from S2</li>
+<li>pull S1 to S2 if S2 is empty</li>
+</ul>
 </li>
 </ul>
+<p>Time: O(1), space: O(N)<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Queue &#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stack1;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stack2;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (!stack1.empty()) &#123;</span><br><span class="line">            stack2.push(stack1.top());</span><br><span class="line">            stack1.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> element)</span> </span>&#123; stack1.push(element); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (stack2.empty()) flush();</span><br><span class="line">        stack2.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (stack2.empty()) flush();</span><br><span class="line">        <span class="keyword">return</span> stack2.top();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> </p>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/dynamic-programming/">dynamic programming</a><a href="/tags/medium/">medium</a><a href="/tags/sliding-window/">sliding window</a>
-  </div>
 
 </div>
 
@@ -131,7 +153,7 @@ Time: $O(MN)$. Space: $O(MN)$.
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/2015/05/16/distinct-subsequences/" data-title="distinct-subsequences | Programming Exercise" data-tsina="null" class="share clearfix">
+	  <div data-url="/2015/06/05/Implement-Queue-by-Two-Stacks/" data-title="Implement Queue by Two Stacks | Programming Exercise" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -145,18 +167,18 @@ Time: $O(MN)$. Space: $O(MN)$.
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/05/17/longest-common-substring/" title="longest-common-substring">
+ <a href="/2015/06/05/Stack-Structure/" title="Stack Structure">
   <strong>上一篇：</strong><br/>
   <span>
-  longest-common-substring</span>
+  Stack Structure</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/05/16/binary-tree-maximum-path-sum/"  title="binary-tree-maximum-path-sum">
+<a href="/2015/06/05/Min-Stack/"  title="Min Stack">
  <strong>下一篇：</strong><br/> 
- <span>binary-tree-maximum-path-sum
+ <span>Min Stack
 </span>
 </a>
 </div>

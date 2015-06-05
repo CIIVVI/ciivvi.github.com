@@ -78,6 +78,338 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/06/05/Largest-Rectangle-in-Histogram-Show-result/" title="Largest Rectangle in Histogram Show result " itemprop="url">Largest Rectangle in Histogram Show result </a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-05T19:34:34.000Z" itemprop="datePublished"> Published 2015-06-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><a href="http://www.lintcode.com/en/problem/largest-rectangle-in-histogram/#" target="_blank" rel="external">LintCode</a><br><strong>Analysis</strong></p>
+<ul>
+<li>exhaustive search: $O(N^2)$</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/05/get-index-of-first-smaller-element-to-the-left/" title="get index of first smaller element to the left" itemprop="url">get index of first smaller element to the left</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-05T18:36:12.000Z" itemprop="datePublished"> Published 2015-06-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Question:">Question:</h1><p>For every element in an array, find the index of first smaller value to the left. If not found, set to -1.<br>Example: a = [2 1 3 4], return [-1 -1 1 2].<br>Challenge: O(N) time.</p>
+<p><strong>Analysis:</strong></p>
+<ul>
+<li>exhaustive search: O(N^2)</li>
+<li>start with example a = [1,5,4,2]<ul>
+<li>for 1, search []</li>
+<li>for 5, search [1]</li>
+<li>for 4, search [1,5]</li>
+<li>for 2, search [1,5,4]<br>It worths noting that comparing to 5 is not necessary, since searching is from right to left, target has already compared to 4.</li>
+</ul>
+</li>
+<li>new strategy:<ul>
+<li>for 1, search []</li>
+<li>for 5, search [1]</li>
+<li>for 4, search [1,5] and delete 5</li>
+<li>for 2, search [1,4] and delete 4</li>
+</ul>
+</li>
+<li>store the searching range with a stack. Every element was pushed and popped once. Time: O(N).</li>
+</ul>
+<p>Time: O(N).<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; getFirstSmallerElementIndexToLeft(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a) &#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; idx(a.size(), <span class="number">0</span>);</span><br><span class="line">    idx.reserve(a.size());</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.size(); i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (!st.empty() &amp;&amp; a[st.top()] &gt;= a[i])</span><br><span class="line">            st.pop();</span><br><span class="line">        idx[i] = st.empty() ? -<span class="number">1</span> : st.top();</span><br><span class="line">        st.push(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> idx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; getFirstSmallerElementIndexToRight(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a) &#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">    <span class="keyword">int</span> len = a.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; idx(len, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = a.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">while</span> (!st.empty() &amp;&amp; a[st.top()] &gt;= a[i])</span><br><span class="line">            st.pop();</span><br><span class="line">        idx[i] = st.empty() ? len : st.top();</span><br><span class="line">        st.push(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> idx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/stack/">stack</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/05/Stack-Structure/" title="Stack Structure" itemprop="url">Stack Structure</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-05T17:20:25.000Z" itemprop="datePublished"> Published 2015-06-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li><p>stack is implemented with $\color{red}{\text{deque}}$  by default</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Container = <span class="built_in">deque</span>&lt;T&gt; &gt; <span class="keyword">class</span> <span class="built_in">stack</span>;</span><br></pre></td></tr></table></figure> 
+</li>
+<li><p>the behavior of <strong>pop / top</strong> an empty stack (<strong>pop_back / back</strong> of underlying deque) is $\color{red}{\text{undefined}}$ . Always check inadvance.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line"><span class="keyword">if</span> (!st.empty()) st.pop();</span><br><span class="line"><span class="keyword">if</span> (!st.empty()) st.top();</span><br></pre></td></tr></table></figure> 
+</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/stack/">stack</a><a href="/tags/structure/">structure</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/05/Implement-Queue-by-Two-Stacks/" title="Implement Queue by Two Stacks" itemprop="url">Implement Queue by Two Stacks</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-05T17:09:52.000Z" itemprop="datePublished"> Published 2015-06-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><strong>Analysis:</strong></p>
+<ul>
+<li>queue: FIFO, stack: LIFO</li>
+<li>Start with a example: [S1: 1,2,3] [S2:] <ul>
+<li>pop, pull S1 to S2, [S1:][S2: 3,2,1] then pop S2.</li>
+<li>push 4, push to S1, [S1: 4][S2: 3,2]</li>
+</ul>
+</li>
+<li>idea:<ul>
+<li>push to S1, pop from S2</li>
+<li>pull S1 to S2 if S2 is empty</li>
+</ul>
+</li>
+</ul>
+<p>Time: O(1), space: O(N)<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Queue &#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stack1;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stack2;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (!stack1.empty()) &#123;</span><br><span class="line">            stack2.push(stack1.top());</span><br><span class="line">            stack1.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> element)</span> </span>&#123; stack1.push(element); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (stack2.empty()) flush();</span><br><span class="line">        stack2.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (stack2.empty()) flush();</span><br><span class="line">        <span class="keyword">return</span> stack2.top();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> </p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/05/Min-Stack/" title="Min Stack" itemprop="url">Min Stack</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-05T16:08:41.000Z" itemprop="datePublished"> Published 2015-06-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><a href="https://leetcode.com/problems/min-stack/" target="_blank" rel="external">LeetCode</a><br><strong>Clarifying questions:</strong></p>
+<ul>
+<li>min() behavior: empty stack?<br><strong>Analysis</strong></li>
+<li>difference to regular stack: min() in O(1), CQ on min().</li>
+<li><p>idea: record current min</p>
+<ul>
+<li>if push, update min value</li>
+<li>if pop, restore previous value of min <ul>
+<li>$\Rightarrow$ need extra structure to store minvalue for $\color{red}{\text{every state}}$ of stack</li>
+<li>$\Rightarrow$ use same structure, a stack, to store the min value of current state.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>time: O(1), space: O(N)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> MinStack &#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; datSt;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; minSt;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        datSt.push(x);</span><br><span class="line">        <span class="keyword">if</span> (minSt.empty() || x &lt;= minSt.top())</span><br><span class="line">            minSt.push(x);</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            minSt.push(minSt.top());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!datSt.empty()) datSt.pop();</span><br><span class="line">        <span class="keyword">if</span> (!minSt.empty()) minSt.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> datSt.top(); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getMin</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> minSt.top(); &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 
+</li>
+</ul>
+<p><strong>Improvement</strong></p>
+<ul>
+<li>minSt pushs when x &lt;= minSt.top()</li>
+<li>minSt pops when datSt.top() == minSt.top();<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> MinStack &#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; datSt;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; minSt;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        datSt.push(x);</span><br><span class="line">        <span class="keyword">if</span> (minSt.empty() || x &lt;= minSt.top())</span><br><span class="line">            minSt.push(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!minSt.empty() &amp;&amp; datSt.top() == minSt.top()) </span><br><span class="line">        	minSt.pop();</span><br><span class="line">        <span class="keyword">if</span> (!datSt.empty()) datSt.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> datSt.top(); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getMin</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> minSt.top(); &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 
+</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/stack/">stack</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/06/04/Bit-Manipulation/" title="Bit Manipulation" itemprop="url">Bit Manipulation</a>
   </h1>
   <p class="article-author">By
@@ -376,300 +708,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/17/Longest-Common-Subsequence/" title="Longest Common Subsequence" itemprop="url">Longest Common Subsequence</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-17T21:18:56.000Z" itemprop="datePublished"> Published 2015-05-17</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="http://www.lintcode.com/en/problem/longest-common-subsequence/" target="_blank" rel="external">Lintcode</a></p>
-<ul>
-<li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubsequence</span><span class="params">(<span class="built_in">string</span> A, <span class="built_in">string</span> B)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: length of LCS between A[?..i-1] and B[?..j-1]</span></span><br><span class="line">    <span class="keyword">int</span> M = A.length(), N = B.length();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(M + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(N + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++) </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">            <span class="keyword">if</span> (A[i-<span class="number">1</span>] == B[j-<span class="number">1</span>]) </span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                f[i][j] = max(f[i-<span class="number">1</span>][j], f[i][j-<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> f[M][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Time: $O(MN)$. Space: $O(N)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubsequence</span><span class="params">(<span class="built_in">string</span> A, <span class="built_in">string</span> B)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: length of LCS between A[?..i-1] and B[?..j-1]</span></span><br><span class="line">    <span class="keyword">int</span> M = A.length(), N = B.length();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(N + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++) </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">            <span class="keyword">if</span> (A[i-<span class="number">1</span>] == B[j-<span class="number">1</span>]) </span><br><span class="line">                f[i%<span class="number">2</span>][j] = f[(i-<span class="number">1</span>)%<span class="number">2</span>][j-<span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                f[i%<span class="number">2</span>][j] = max(f[(i-<span class="number">1</span>)%<span class="number">2</span>][j], f[i%<span class="number">2</span>][j-<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> f[M%<span class="number">2</span>][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/17/k-Sum/" title="k Sum" itemprop="url">k Sum</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-17T17:21:10.000Z" itemprop="datePublished"> Published 2015-05-17</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="http://www.lintcode.com/en/problem/k-sum/" target="_blank" rel="external">Lintcode</a></p>
-<ul>
-<li><p>Time: $O(NKT)$. Space: $O(NKT)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A, <span class="keyword">int</span> k, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j][t]: # solutions picking j from first i numbers</span></span><br><span class="line">    <span class="comment">// that sum up to t</span></span><br><span class="line">    <span class="keyword">int</span> n = A.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&gt; f(n + <span class="number">1</span>, </span><br><span class="line">           <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;(k + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; (target + <span class="number">1</span>, <span class="number">0</span>)));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</span><br><span class="line">        f[i][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= k &amp;&amp; j &lt;= i; j++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">0</span>; t &lt;= target; t++) &#123;</span><br><span class="line">                f[i][j][t] = f[i-<span class="number">1</span>][j][t];</span><br><span class="line">                <span class="keyword">if</span> (t &gt;= A[i-<span class="number">1</span>])</span><br><span class="line">                    f[i][j][t] += f[i-<span class="number">1</span>][j-<span class="number">1</span>][t-A[i-<span class="number">1</span>]];</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[n][k][target];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Time: $O(NKT)$. Space: $O(KT)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A, <span class="keyword">int</span> k, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j][t]: # solutions picking j from first i numbers</span></span><br><span class="line">    <span class="comment">// that sum up to t</span></span><br><span class="line">    <span class="keyword">int</span> n = A.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&gt; f(<span class="number">2</span>, </span><br><span class="line">           <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;(k + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; (target + <span class="number">1</span>, <span class="number">0</span>)));</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>] = f[<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= k &amp;&amp; j &lt;= i; j++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">0</span>; t &lt;= target; t++) &#123;</span><br><span class="line">                f[i % <span class="number">2</span>][j][t] = f[(i-<span class="number">1</span>) % <span class="number">2</span>][j][t];</span><br><span class="line">                <span class="keyword">if</span> (t &gt;= A[i-<span class="number">1</span>])</span><br><span class="line">                    f[i % <span class="number">2</span>][j][t] += f[(i-<span class="number">1</span>) % <span class="number">2</span>][j-<span class="number">1</span>][t-A[i-<span class="number">1</span>]];</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[n % <span class="number">2</span>][k][target];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/17/backpack-ii/" title="backpack-ii" itemprop="url">backpack-ii</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-17T16:08:24.000Z" itemprop="datePublished"> Published 2015-05-17</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="http://www.lintcode.com/en/problem/backpack-ii/" target="_blank" rel="external">Lintcode</a></p>
-<ul>
-<li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">backPackII</span><span class="params">(<span class="keyword">int</span> m, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; V)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]:pick (some of) first i items </span></span><br><span class="line">    <span class="comment">// which size sums up to j, record max value</span></span><br><span class="line">    <span class="keyword">int</span> n = A.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(n + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(m + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">int</span> maxVal = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            f[i][j] = f[i-<span class="number">1</span>][j];</span><br><span class="line">            <span class="keyword">if</span> (j &gt;= A[i-<span class="number">1</span>]) </span><br><span class="line">                f[i][j] = max(f[i][j], f[i-<span class="number">1</span>][j-A[i-<span class="number">1</span>]] + V[i-<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">if</span> (f[i][j] &gt; maxVal)</span><br><span class="line">                maxVal = f[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> maxVal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Time: $O(MN)$. Space: $O(N)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">backPackII</span><span class="params">(<span class="keyword">int</span> m, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; V)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = A.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; f(m + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> maxVal = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (j &gt;= A[i-<span class="number">1</span>]) </span><br><span class="line">                f[j] = max(f[j], f[j-A[i-<span class="number">1</span>]] + V[i-<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">if</span> (f[j] &gt; maxVal)</span><br><span class="line">                maxVal = f[j];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> maxVal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/17/Backpack/" title="Backpack" itemprop="url">Backpack</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-17T07:36:41.000Z" itemprop="datePublished"> Published 2015-05-17</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="http://www.lintcode.com/en/problem/backpack/#" target="_blank" rel="external">Lintcode</a></p>
-<ul>
-<li>Time: $O(MN)$. Space: $O(N)$.<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">backPack</span><span class="params">(<span class="keyword">int</span> m, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: pick (some) from first i items, can sum up to j</span></span><br><span class="line">    <span class="keyword">int</span> n = A.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(m + <span class="number">1</span>, <span class="keyword">false</span>));</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        f[i % <span class="number">2</span>][<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">            f[i % <span class="number">2</span>][j] = (f[(i-<span class="number">1</span>) % <span class="number">2</span>][j] </span><br><span class="line">            || (j &gt;= A[i-<span class="number">1</span>] &amp;&amp; f[(i-<span class="number">1</span>) % <span class="number">2</span>][j - A[i-<span class="number">1</span>]]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">        <span class="keyword">if</span> (f[n % <span class="number">2</span>][j]) <span class="keyword">return</span> j;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/dynamic-programming/">dynamic programming</a><a href="/tags/medium/">medium</a><a href="/tags/sliding-window/">sliding window</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/17/Interleaving-String/" title="Interleaving String" itemprop="url">Interleaving String</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-17T06:20:45.000Z" itemprop="datePublished"> Published 2015-05-17</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="https://leetcode.com/problems/interleaving-string/" target="_blank" rel="external">Leetcode</a></p>
-<ul>
-<li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isInterleave</span><span class="params">(<span class="built_in">string</span> s1, <span class="built_in">string</span> s2, <span class="built_in">string</span> s3)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: s3.substr(0,i+j) is interleaving of s1.substr(0,i) and s2.substr(0,j)</span></span><br><span class="line">    <span class="keyword">int</span> M = s1.length(), N = s2.length();</span><br><span class="line">    <span class="keyword">if</span> ((M + N) != s3.length()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&gt; f(M + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;(N + <span class="number">1</span>, <span class="keyword">false</span>));</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= N; j++) </span><br><span class="line">            <span class="keyword">if</span> ((i &gt; <span class="number">0</span> &amp;&amp; s1[i-<span class="number">1</span>] == s3[i+j-<span class="number">1</span>] &amp;&amp; f[i-<span class="number">1</span>][j])</span><br><span class="line">             || (j &gt; <span class="number">0</span> &amp;&amp; s2[j-<span class="number">1</span>] == s3[i+j-<span class="number">1</span>] &amp;&amp; f[i][j-<span class="number">1</span>]))</span><br><span class="line">                f[i][j] = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">return</span> f[M][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Time: $O(MN)$. Space: $O(N)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isInterleave</span><span class="params">(<span class="built_in">string</span> s1, <span class="built_in">string</span> s2, <span class="built_in">string</span> s3)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: s3.substr(0,i+j) is interleaving of s1.substr(0,i) and s2.substr(0,j)</span></span><br><span class="line">    <span class="keyword">int</span> M = s1.length(), N = s2.length();</span><br><span class="line">    <span class="keyword">if</span> ((M + N) != s3.length()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; pre(N + <span class="number">1</span>, <span class="keyword">false</span>), cur(N + <span class="number">1</span>, <span class="keyword">false</span>);</span><br><span class="line">    pre[<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">        pre[j] = (s2[j-<span class="number">1</span>] == s3[j-<span class="number">1</span>]) &amp;&amp; pre[j-<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++) &#123;</span><br><span class="line">        cur[<span class="number">0</span>] = (s1[i-<span class="number">1</span>] == s3[i-<span class="number">1</span>]) &amp;&amp; pre[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">            cur[j] = (s1[i-<span class="number">1</span>] == s3[i+j-<span class="number">1</span>] &amp;&amp; pre[j])</span><br><span class="line">                  || (s2[j-<span class="number">1</span>] == s3[i+j-<span class="number">1</span>] &amp;&amp; cur[j-<span class="number">1</span>]);</span><br><span class="line">        swap(pre, cur);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pre[N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/dynamic-programming/">dynamic programming</a><a href="/tags/medium/">medium</a><a href="/tags/sliding-window/">sliding window</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -707,7 +748,15 @@
 			
 		
 			
+				<li><a href="/tags/stack/" title="stack">stack<sup>3</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/sort/" title="sort">sort<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/structure/" title="structure">structure<sup>1</sup></a></li>
 			
 		
 		</ul>

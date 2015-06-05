@@ -4,31 +4,43 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>distinct-subsequences | Programming Exercise</title>
+    <title>Min Stack | Programming Exercise</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Cheng">
     
 
     
-    <meta name="description" content="Lintcode
+    <meta name="description" content="LeetCodeClarifying questions:
 
-Time: $O(MN)$. Space: $O(MN)$.
-12345678910111213141516171819int numDistinct(string &amp;amp;s, string &amp;amp;t) &amp;#123;    // f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)    // f[i][0">
+min() behavior: empty stack?Analysis
+difference to regular stack: min() in O(1), CQ on min().
+idea: record current min
+
+if push, update min value
+if pop, restore previou">
 <meta property="og:type" content="article">
-<meta property="og:title" content="distinct-subsequences">
-<meta property="og:url" content="/2015/05/16/distinct-subsequences/index.html">
+<meta property="og:title" content="Min Stack">
+<meta property="og:url" content="/2015/06/05/Min-Stack/index.html">
 <meta property="og:site_name" content="Programming Exercise">
-<meta property="og:description" content="Lintcode
+<meta property="og:description" content="LeetCodeClarifying questions:
 
-Time: $O(MN)$. Space: $O(MN)$.
-12345678910111213141516171819int numDistinct(string &amp;amp;s, string &amp;amp;t) &amp;#123;    // f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)    // f[i][0">
+min() behavior: empty stack?Analysis
+difference to regular stack: min() in O(1), CQ on min().
+idea: record current min
+
+if push, update min value
+if pop, restore previou">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="distinct-subsequences">
-<meta name="twitter:description" content="Lintcode
+<meta name="twitter:title" content="Min Stack">
+<meta name="twitter:description" content="LeetCodeClarifying questions:
 
-Time: $O(MN)$. Space: $O(MN)$.
-12345678910111213141516171819int numDistinct(string &amp;amp;s, string &amp;amp;t) &amp;#123;    // f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)    // f[i][0">
+min() behavior: empty stack?Analysis
+difference to regular stack: min() in O(1), CQ on min().
+idea: record current min
+
+if push, update min value
+if pop, restore previou">
 
     
     <link rel="alternative" href="/atom.xml" title="Programming Exercise" type="application/atom+xml">
@@ -85,14 +97,14 @@ Time: $O(MN)$. Space: $O(MN)$.
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/16/distinct-subsequences/" title="distinct-subsequences" itemprop="url">distinct-subsequences</a>
+      <a href="/2015/06/05/Min-Stack/" title="Min Stack" itemprop="url">Min Stack</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-17T03:23:20.000Z" itemprop="datePublished"> Published 2015-05-16</time>
+    <time datetime="2015-06-05T16:08:41.000Z" itemprop="datePublished"> Published 2015-06-05</time>
     
   </p>
 </header>
@@ -105,13 +117,28 @@ Time: $O(MN)$. Space: $O(MN)$.
 		
 		</div>
 		
-		<p><a href="http://www.lintcode.com/en/problem/distinct-subsequences/" target="_blank" rel="external">Lintcode</a></p>
+		<p><a href="https://leetcode.com/problems/min-stack/" target="_blank" rel="external">LeetCode</a><br><strong>Clarifying questions:</strong></p>
 <ul>
-<li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="built_in">string</span> &amp;s, <span class="built_in">string</span> &amp;t)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: # choice picking t.substr(0,j) from s.substr(0,i)</span></span><br><span class="line">    <span class="comment">// f[i][0]: # choice picking "" from s.substr(0,i)</span></span><br><span class="line">    <span class="comment">// f[0][j]: # choice picking s.substr(0,j) from ""</span></span><br><span class="line">    <span class="keyword">int</span> M = s.length(), N = t.length();</span><br><span class="line">    <span class="keyword">if</span> (M &lt; N) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(M+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; (N+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= M; i++) </span><br><span class="line">        f[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i-<span class="number">1</span>] == t[j-<span class="number">1</span>]) &#123;</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j-<span class="number">1</span>] + f[i-<span class="number">1</span>][j];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> f[M][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>min() behavior: empty stack?<br><strong>Analysis</strong></li>
+<li>difference to regular stack: min() in O(1), CQ on min().</li>
+<li><p>idea: record current min</p>
+<ul>
+<li>if push, update min value</li>
+<li>if pop, restore previous value of min <ul>
+<li>$\Rightarrow$ need extra structure to store minvalue for $\color{red}{\text{every state}}$ of stack</li>
+<li>$\Rightarrow$ use same structure, a stack, to store the min value of current state.</li>
+</ul>
 </li>
-<li><p>Time: $O(MN)$. Space: $O(N)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="built_in">string</span> &amp;s, <span class="built_in">string</span> &amp;t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> M = s.length(), N = t.length();</span><br><span class="line">    <span class="keyword">if</span> (M &lt; N) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; f(N + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = N; N &gt;= <span class="number">1</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i-<span class="number">1</span>] == t[j-<span class="number">1</span>])</span><br><span class="line">                f[j] += f[j-<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> f[N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</ul>
+</li>
+<li><p>time: O(1), space: O(N)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> MinStack &#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; datSt;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; minSt;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        datSt.push(x);</span><br><span class="line">        <span class="keyword">if</span> (minSt.empty() || x &lt;= minSt.top())</span><br><span class="line">            minSt.push(x);</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            minSt.push(minSt.top());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!datSt.empty()) datSt.pop();</span><br><span class="line">        <span class="keyword">if</span> (!minSt.empty()) minSt.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> datSt.top(); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getMin</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> minSt.top(); &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 
+</li>
+</ul>
+<p><strong>Improvement</strong></p>
+<ul>
+<li>minSt pushs when x &lt;= minSt.top()</li>
+<li>minSt pops when datSt.top() == minSt.top();<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> MinStack &#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; datSt;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; minSt;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        datSt.push(x);</span><br><span class="line">        <span class="keyword">if</span> (minSt.empty() || x &lt;= minSt.top())</span><br><span class="line">            minSt.push(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!minSt.empty() &amp;&amp; datSt.top() == minSt.top()) </span><br><span class="line">        	minSt.pop();</span><br><span class="line">        <span class="keyword">if</span> (!datSt.empty()) datSt.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> datSt.top(); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getMin</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> minSt.top(); &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 
 </li>
 </ul>
   
@@ -122,7 +149,7 @@ Time: $O(MN)$. Space: $O(MN)$.
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/dynamic-programming/">dynamic programming</a><a href="/tags/medium/">medium</a><a href="/tags/sliding-window/">sliding window</a>
+  <span></span> <a href="/tags/stack/">stack</a>
   </div>
 
 </div>
@@ -131,7 +158,7 @@ Time: $O(MN)$. Space: $O(MN)$.
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/2015/05/16/distinct-subsequences/" data-title="distinct-subsequences | Programming Exercise" data-tsina="null" class="share clearfix">
+	  <div data-url="/2015/06/05/Min-Stack/" data-title="Min Stack | Programming Exercise" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -145,18 +172,18 @@ Time: $O(MN)$. Space: $O(MN)$.
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/05/17/longest-common-substring/" title="longest-common-substring">
+ <a href="/2015/06/05/Implement-Queue-by-Two-Stacks/" title="Implement Queue by Two Stacks">
   <strong>上一篇：</strong><br/>
   <span>
-  longest-common-substring</span>
+  Implement Queue by Two Stacks</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/05/16/binary-tree-maximum-path-sum/"  title="binary-tree-maximum-path-sum">
+<a href="/2015/06/04/Bit-Manipulation/"  title="Bit Manipulation">
  <strong>下一篇：</strong><br/> 
- <span>binary-tree-maximum-path-sum
+ <span>Bit Manipulation
 </span>
 </a>
 </div>

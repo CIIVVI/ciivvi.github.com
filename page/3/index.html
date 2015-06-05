@@ -4,25 +4,22 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Binary Tree Inorder Traversal | Programming Exercise</title>
+    <title>Programming Exercise</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Patrick Cheng">
     
 
     
-    <meta name="description" content="Leetcode
-12345678910111213141516171819vector&amp;lt;int&amp;gt; inorderTraversal(TreeNode* root) &amp;#123;    vector&amp;lt;int&amp;gt; inorder;    if (!root) return inorder;    TreeNode *node = root;    stack&amp;lt;TreeNo">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Binary Tree Inorder Traversal">
-<meta property="og:url" content="/2015/05/16/Binary-Tree-Inorder-Traversal/index.html">
+    <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Programming Exercise">
+<meta property="og:url" content="/page/3/index.html">
 <meta property="og:site_name" content="Programming Exercise">
-<meta property="og:description" content="Leetcode
-12345678910111213141516171819vector&amp;lt;int&amp;gt; inorderTraversal(TreeNode* root) &amp;#123;    vector&amp;lt;int&amp;gt; inorder;    if (!root) return inorder;    TreeNode *node = root;    stack&amp;lt;TreeNo">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Binary Tree Inorder Traversal">
-<meta name="twitter:description" content="Leetcode
-12345678910111213141516171819vector&amp;lt;int&amp;gt; inorderTraversal(TreeNode* root) &amp;#123;    vector&amp;lt;int&amp;gt; inorder;    if (!root) return inorder;    TreeNode *node = root;    stack&amp;lt;TreeNo">
+<meta name="twitter:title" content="Programming Exercise">
+<meta name="twitter:description">
 
     
     <link rel="alternative" href="/atom.xml" title="Programming Exercise" type="application/atom+xml">
@@ -73,10 +70,124 @@
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/16/Maximum-Depth-of-Binary-Tree/" title="Maximum Depth of Binary Tree" itemprop="url">Maximum Depth of Binary Tree</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-17T00:51:10.000Z" itemprop="datePublished"> Published 2015-05-16</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><a href="http://www.lintcode.com/en/problem/maximum-depth-of-binary-tree/" target="_blank" rel="external">Lintcode</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode *root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> l = maxDepth(root-&gt;left);</span><br><span class="line">    <span class="keyword">int</span> r = maxDepth(root-&gt;right);</span><br><span class="line">    <span class="keyword">return</span> max(l, r) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
   
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
+  <span></span> <a href="/tags/binary-tree/">binary tree</a><a href="/tags/easy/">easy</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/16/Binary-Tree-Preorder-Traversal/" title="Binary Tree Preorder Traversal" itemprop="url">Binary Tree Preorder Traversal</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-17T00:41:48.000Z" itemprop="datePublished"> Published 2015-05-16</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><a href="https://leetcode.com/problems/binary-tree-preorder-traversal/" target="_blank" rel="external">Leetcode</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorderTraversal(TreeNode* root) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorder;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> preorder;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode *&gt; st;</span><br><span class="line">    st.push(root);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (!st.empty()) &#123;</span><br><span class="line">        root = st.top();</span><br><span class="line">        st.pop();</span><br><span class="line">        preorder.push_back(root-&gt;val);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right) st.push(root-&gt;right);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left) st.push(root-&gt;left);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> preorder;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/binary-tree/">binary tree</a><a href="/tags/easy/">easy</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/2015/05/16/Binary-Tree-Inorder-Traversal/" title="Binary Tree Inorder Traversal" itemprop="url">Binary Tree Inorder Traversal</a>
@@ -90,20 +201,18 @@
     
   </p>
 </header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		
-			
-		
-		</div>
-		
-		<p><a href="https://leetcode.com/problems/binary-tree-inorder-traversal/" target="_blank" rel="external">Leetcode</a></p>
+    <div class="article-content">
+        
+        <p><a href="https://leetcode.com/problems/binary-tree-inorder-traversal/" target="_blank" rel="external">Leetcode</a></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; inorderTraversal(TreeNode* root) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; inorder;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> inorder;</span><br><span class="line">    TreeNode *node = root;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode *&gt; st;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (node || !st.empty()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (node) &#123; <span class="comment">// push current node before left child</span></span><br><span class="line">            st.push(node);</span><br><span class="line">            node = node-&gt;left;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// print parent before push right child</span></span><br><span class="line">            node = st.top();</span><br><span class="line">            st.pop();</span><br><span class="line">            inorder.push_back(node-&gt;val);</span><br><span class="line">            node = node-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> inorder;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-  
-	</div>
-		<footer class="article-footer clearfix">
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
 <div class="article-catetags">
 
 
@@ -116,43 +225,28 @@
 
 
 
-	<div class="article-share" id="share">
-	
-	  <div data-url="/2015/05/16/Binary-Tree-Inorder-Traversal/" data-title="Binary Tree Inorder Traversal | Programming Exercise" data-tsina="null" class="share clearfix">
-	  </div>
-	
-	</div>
 
+<div class="comments-count">
+	
+</div>
 
 </footer>
 
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2015/05/16/Binary-Tree-Preorder-Traversal/" title="Binary Tree Preorder Traversal">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Binary Tree Preorder Traversal</span>
-</a>
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 </div>
-
-
-</nav>
-
-	
-
-</div>  
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
- 
- 
- 
-  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
@@ -288,69 +382,12 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
 });
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
 
 
 
@@ -457,4 +494,4 @@ _ts(option);
 <!-- Tiny_search End -->
 
   </body>
-</html>
+ </html>
