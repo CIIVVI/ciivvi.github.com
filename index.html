@@ -78,6 +78,88 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/06/04/Bit-Manipulation/" title="Bit Manipulation" itemprop="url">Bit Manipulation</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-04T19:50:26.000Z" itemprop="datePublished"> Published 2015-06-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> getBit = [] (<span class="keyword">int</span> x, <span class="keyword">int</span> b) &#123; </span><br><span class="line">	<span class="keyword">return</span> (<span class="keyword">bool</span>) (x &amp; <span class="number">1</span> &lt;&lt; b); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> setBit = [] (<span class="keyword">int</span> x, <span class="keyword">int</span> b) &#123; </span><br><span class="line">	<span class="keyword">return</span> x | <span class="number">1</span> &lt;&lt; b; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> clearBit = [] (<span class="keyword">int</span> x, <span class="keyword">int</span> b) &#123; </span><br><span class="line">	<span class="keyword">return</span> x &amp; ~(<span class="number">1</span> &lt;&lt; b); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> bitPrint = [] (<span class="keyword">int</span> x) &#123; </span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">bitset</span>&lt;32&gt; (x) &lt;&lt; endl; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> isPower2 = [] (<span class="keyword">int</span> x) &#123;</span><br><span class="line">	<span class="keyword">return</span> x &amp; (x - <span class="number">1</span>) == <span class="number">0</span>;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> clearRightMostOne = [] (<span class="keyword">int</span> x) &#123;</span><br><span class="line">	<span class="keyword">return</span> x &amp; (x - <span class="number">1</span>); &#125;;</span><br></pre></td></tr></table></figure> 
+<h2 id="Q_5-1">Q 5.1</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setBits</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> &amp;n, <span class="keyword">int</span> from, <span class="keyword">int</span> to)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> mask = (<span class="number">1</span> &lt;&lt; (j - i + <span class="number">1</span>) - <span class="number">1</span>) &lt;&lt; i;</span><br><span class="line">    n &amp;= mask;   <span class="comment">// clear</span></span><br><span class="line">    n |= m &lt;&lt; i; <span class="comment">// set</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+<h2 id="Q_5-2">Q 5.2</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">printFractionInBinary</span><span class="params">(<span class="keyword">double</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x &gt;= <span class="number">1</span> || x &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="string">"ERROR"</span>;</span><br><span class="line">    <span class="built_in">string</span> bin = <span class="string">"."</span>;</span><br><span class="line">    <span class="keyword">while</span> (x) &#123;</span><br><span class="line">        <span class="keyword">if</span> (bin.length() &gt; <span class="number">32</span>) <span class="keyword">return</span> <span class="string">"ERROR"</span>;</span><br><span class="line">        x *= <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (x &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">            bin.append(<span class="string">"1"</span>);</span><br><span class="line">            x -= <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            bin.append(<span class="string">"0"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+<h2 id="Q_5-3">Q 5.3</h2><p><strong>Clarifying questions:</strong></p>
+<ul>
+<li>00001 $\Rightarrow$ 00010</li>
+<li>00010 $\Rightarrow$ 00100</li>
+<li>00011 $\Rightarrow$ 00101</li>
+<li>00101 $\Rightarrow$ 00110</li>
+<li>10110 $\Rightarrow$ 11001</li>
+<li>0? all 1? all 1 with trailing 0’s?</li>
+<li>$\color{red}{\text{Type of input, int? unsigned int?}}$ </li>
+</ul>
+<p><strong>Analysis:</strong><br>10110 $\Rightarrow$ 11010 $\Rightarrow$ 11001</p>
+<ul>
+<li>swapping a 1-bit with a 0-bit to its left increase the number.</li>
+<li>swapping a 1-bit with a 0-bit to its right decrease the number.</li>
+<li>given k 1’s, the smallest number is 001..1.</li>
+</ul>
+<p><strong>Algorithm:</strong></p>
+<ul>
+<li>increase first, then decrease to minimal.</li>
+<li>find the rightmost non-trailing 0-bit (b-th bit from right), swap with the bit to its right.</li>
+<li>flush all the 1’s under b-th bit to the right. $\Rightarrow$ count #1-bit and set.</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">getNext</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> c = n;</span><br><span class="line">    <span class="keyword">int</span> n0 = <span class="number">0</span>; <span class="comment">// #zeros</span></span><br><span class="line">    <span class="keyword">int</span> n1 = <span class="number">0</span>; <span class="comment">// #ones</span></span><br><span class="line">    <span class="keyword">while</span> ((c &amp; <span class="number">1</span>) == <span class="number">0</span>) &#123;</span><br><span class="line">        c &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        n0++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ((c &amp; <span class="number">1</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">        c &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        n1++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> b = n0 + n1;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">32</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    n |= <span class="number">1</span> &lt;&lt; b; <span class="comment">// increase</span></span><br><span class="line">    n &amp;= ~<span class="number">0</span> &lt;&lt; b; <span class="comment">// clear bits 0..b-1</span></span><br><span class="line">    n |= (<span class="number">1</span> &lt;&lt; (n1 - <span class="number">1</span>)) - <span class="number">1</span>; <span class="comment">// set 1's</span></span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">getPre</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span> || ~n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> c = n;</span><br><span class="line">    <span class="keyword">int</span> n0 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> n1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> ((c &amp; <span class="number">1</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">        c &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        n1++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ((c &amp; <span class="number">1</span>) == <span class="number">0</span>) &#123;</span><br><span class="line">        c &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        n0++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> b = n0 + n1;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">32</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    n &amp;= ~<span class="number">0</span> &lt;&lt; (b + <span class="number">1</span>); <span class="comment">// clear bit 0...b</span></span><br><span class="line">    n |= ((<span class="number">1</span> &lt;&lt; (n1 + <span class="number">1</span>)) - <span class="number">1</span>) &lt;&lt; (n0 - <span class="number">1</span>); <span class="comment">// set 1's</span></span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+<p><strong>Note:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n = ~<span class="number">0</span>;</span><br><span class="line">n &gt;&gt;= <span class="number">1</span>; <span class="comment">// what is n? </span></span><br><span class="line">         <span class="comment">// n is still ~0, because the sign bit doesn't change.</span></span><br></pre></td></tr></table></figure> </p>
+<h2 id="Q_5-4">Q 5.4</h2><ul>
+<li>compare n with (n-1):<br> n   = x..x10..0<br> n-1 = x..x01..1</li>
+<li>n &amp; (n-1) == 0 $\Rightarrow$ n = 10..0, n is a power of 2</li>
+</ul>
+<h2 id="Q_5-5">Q 5.5</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">nBitSwapRequired</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span> c = a^b; c != <span class="number">0</span>; c &amp;= c - <span class="number">1</span>)</span><br><span class="line">		cnt++;</span><br><span class="line">	<span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+<h2 id="Q_5-6">Q 5.6</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">swapOddEvenBits</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> ((x &amp; oxaaaaaaaa) &gt;&gt; <span class="number">1</span>) | ((x &amp; ox55555555) &lt;&lt; <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/05/19/merge-sort/" title="merge sort" itemprop="url">merge sort</a>
   </h1>
   <p class="article-author">By
@@ -549,69 +631,6 @@
 </li>
 <li><p>Time: $O(MN)$. Space: $O(N)$.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isInterleave</span><span class="params">(<span class="built_in">string</span> s1, <span class="built_in">string</span> s2, <span class="built_in">string</span> s3)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: s3.substr(0,i+j) is interleaving of s1.substr(0,i) and s2.substr(0,j)</span></span><br><span class="line">    <span class="keyword">int</span> M = s1.length(), N = s2.length();</span><br><span class="line">    <span class="keyword">if</span> ((M + N) != s3.length()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; pre(N + <span class="number">1</span>, <span class="keyword">false</span>), cur(N + <span class="number">1</span>, <span class="keyword">false</span>);</span><br><span class="line">    pre[<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">        pre[j] = (s2[j-<span class="number">1</span>] == s3[j-<span class="number">1</span>]) &amp;&amp; pre[j-<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++) &#123;</span><br><span class="line">        cur[<span class="number">0</span>] = (s1[i-<span class="number">1</span>] == s3[i-<span class="number">1</span>]) &amp;&amp; pre[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">            cur[j] = (s1[i-<span class="number">1</span>] == s3[i+j-<span class="number">1</span>] &amp;&amp; pre[j])</span><br><span class="line">                  || (s2[j-<span class="number">1</span>] == s3[i+j-<span class="number">1</span>] &amp;&amp; cur[j-<span class="number">1</span>]);</span><br><span class="line">        swap(pre, cur);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pre[N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/dynamic-programming/">dynamic programming</a><a href="/tags/medium/">medium</a><a href="/tags/sliding-window/">sliding window</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/17/edit-distance/" title="edit-distance" itemprop="url">edit-distance</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-17T04:49:16.000Z" itemprop="datePublished"> Published 2015-05-17</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="http://www.lintcode.com/en/problem/edit-distance/" target="_blank" rel="external">Lintcode</a></p>
-<ul>
-<li><p>Time: $O(MN)$. Space: $O(MN)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(<span class="built_in">string</span> word1, <span class="built_in">string</span> word2)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: edit dist between word1.substr(0,i) and word2.substr(0,j)</span></span><br><span class="line">    <span class="keyword">int</span> M = word1.length(), N = word2.length();</span><br><span class="line">    <span class="keyword">if</span> (M == <span class="number">0</span> || N == <span class="number">0</span>) <span class="keyword">return</span> max(M, N);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(M+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(N+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= M; i++) f[i][<span class="number">0</span>] = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= N; j++) f[<span class="number">0</span>][j] = j;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++) </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">            <span class="keyword">if</span> (word1[i-<span class="number">1</span>] == word2[j-<span class="number">1</span>])</span><br><span class="line">                f[i][j] = f[i-<span class="number">1</span>][j-<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                f[i][j] = min(min(f[i-<span class="number">1</span>][j], f[i][j-<span class="number">1</span>]), f[i-<span class="number">1</span>][j-<span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> f[M][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Time: $O(MN)$. Space: $O(N)$.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(<span class="built_in">string</span> word1, <span class="built_in">string</span> word2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> M = word1.length(), N = word2.length();</span><br><span class="line">    <span class="keyword">if</span> (M == <span class="number">0</span> || N == <span class="number">0</span>) <span class="keyword">return</span> max(M, N);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(N+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= N; j++) f[<span class="number">0</span>][j] = j;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; i++) &#123;</span><br><span class="line">        f[i % <span class="number">2</span>][<span class="number">0</span>] = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">            <span class="keyword">if</span> (word1[i-<span class="number">1</span>] == word2[j-<span class="number">1</span>])</span><br><span class="line">                f[i % <span class="number">2</span>][j] = f[(i-<span class="number">1</span>) % <span class="number">2</span>][j-<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                f[i % <span class="number">2</span>][j] = min(f[(i-<span class="number">1</span>) %<span class="number">2</span>][j-<span class="number">1</span>], </span><br><span class="line">                min(f[(i-<span class="number">1</span>) % <span class="number">2</span>][j], f[i % <span class="number">2</span>][j-<span class="number">1</span>])) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[M % <span class="number">2</span>][N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
 </ul>
 
         
