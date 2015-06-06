@@ -78,6 +78,63 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/05/17/Minimum-Adjustment-Cost/" title="Minimum Adjustment Cost" itemprop="url">Minimum Adjustment Cost</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-17T22:15:35.000Z" itemprop="datePublished"> Published 2015-05-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li><p>Time: $O(MNK)$. Space: $O(MNR)$, $R$ = range of A.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MinAdjustmentCost</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: min adjustment cost of &#123;A[0..i] and A[i] = j&#125;</span></span><br><span class="line">    <span class="comment">// f[i][j] = arg_x min&#123;f[i-1][x] + |A[i]-j|&#125;</span></span><br><span class="line">    <span class="comment">//           min search range abs(x-j) &lt;= target</span></span><br><span class="line">    <span class="keyword">int</span> N = A.size(), M = <span class="number">100</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(N, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(M + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M; j++) </span><br><span class="line">        f[<span class="number">0</span>][j] = <span class="built_in">abs</span>(A[<span class="number">0</span>] - j);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N; i++) </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M; j++) &#123;</span><br><span class="line">            f[i][j] = INT_MAX;   </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x = max(j - target, <span class="number">0</span>); x &lt;= min(j + target, M); x++) </span><br><span class="line">                f[i][j] = min(f[i][j], f[i-<span class="number">1</span>][x] + <span class="built_in">abs</span>(A[i] - j));</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">int</span> minCost = INT_MAX;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M; j++)</span><br><span class="line">        <span class="keyword">if</span> (f[N-<span class="number">1</span>][j] &lt; minCost)</span><br><span class="line">            minCost = f[N-<span class="number">1</span>][j];</span><br><span class="line">    <span class="keyword">return</span> minCost;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Time: $O(MNK)$. Space: $O(NR)$, $R$ = range of A.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MinAdjustmentCost</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: min adjustment cost of &#123;A[0..i] and A[i] = j&#125;</span></span><br><span class="line">    <span class="comment">// f[i][j] = arg_x min&#123;f[i-1][x] + |A[i]-j|&#125;</span></span><br><span class="line">    <span class="comment">//           min search range abs(x-j) &lt;= target</span></span><br><span class="line">    <span class="keyword">int</span> N = A.size(), M = <span class="number">100</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(M + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M; j++) </span><br><span class="line">        f[<span class="number">0</span>][j] = <span class="built_in">abs</span>(A[<span class="number">0</span>] - j);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N; i++) </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M; j++) &#123;</span><br><span class="line">            f[i%<span class="number">2</span>][j] = INT_MAX;   </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x = max(j - target, <span class="number">0</span>); x &lt;= min(j + target, M); x++) </span><br><span class="line">                f[i%<span class="number">2</span>][j] = min(f[i%<span class="number">2</span>][j], f[(i-<span class="number">1</span>)%<span class="number">2</span>][x] + <span class="built_in">abs</span>(A[i] - j));</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">int</span> minCost = INT_MAX;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M; j++)</span><br><span class="line">        <span class="keyword">if</span> (f[(N-<span class="number">1</span>)%<span class="number">2</span>][j] &lt; minCost)</span><br><span class="line">            minCost = f[(N-<span class="number">1</span>)%<span class="number">2</span>][j];</span><br><span class="line">    <span class="keyword">return</span> minCost;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/05/17/Longest-Common-Subsequence/" title="Longest Common Subsequence" itemprop="url">Longest Common Subsequence</a>
   </h1>
   <p class="article-author">By
@@ -574,61 +631,6 @@
         <p><a href="https://leetcode.com/problems/binary-tree-maximum-path-sum/" target="_blank" rel="external">Leetcode</a></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getPathSum</span><span class="params">(TreeNode *root, <span class="keyword">int</span> &amp;maxPath)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// case 1: max path go through root</span></span><br><span class="line">    <span class="comment">//         need to record 'single path' start from root-&gt;left (right), may be empty path</span></span><br><span class="line">    <span class="comment">// case 2: max path in left (right) subtree</span></span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> sumLeft = getPathSum(root-&gt;left, maxPath);</span><br><span class="line">    <span class="keyword">int</span> sumRight = getPathSum(root-&gt;right, maxPath);</span><br><span class="line">    maxPath = max(maxPath, sumLeft + sumRight + root-&gt;val);</span><br><span class="line">    <span class="keyword">return</span> max(max(sumLeft, sumRight) + root-&gt;val, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxPathSum</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> maxPath = INT_MIN;</span><br><span class="line">    getPathSum(root, maxPath);</span><br><span class="line">    <span class="keyword">return</span> maxPath;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/binary-tree/">binary tree</a><a href="/tags/easy/">easy</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/16/Balanced-Binary-Tree/" title="Balanced Binary Tree" itemprop="url">Balanced Binary Tree</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-17T00:59:09.000Z" itemprop="datePublished"> Published 2015-05-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="https://leetcode.com/problems/balanced-binary-tree/" target="_blank" rel="external">Leetcode</a></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">checkBalanced</span><span class="params">(TreeNode *root)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// unbalanced: return -1; otherwise return height</span></span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> l = checkBalanced(root-&gt;left);</span><br><span class="line">    <span class="keyword">int</span> r = checkBalanced(root-&gt;right);</span><br><span class="line">    <span class="keyword">if</span> (l == -<span class="number">1</span> || r == -<span class="number">1</span> || <span class="built_in">abs</span>(l - r) &gt; <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> max(l, r) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isBalanced</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> checkBalanced(root) != -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
         
         <p class="article-more-link">

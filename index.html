@@ -78,6 +78,56 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/06/05/Max-Tree/" title="Max Tree" itemprop="url">Max Tree</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-05T20:51:27.000Z" itemprop="datePublished"> Published 2015-06-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <div><br>    <a href="https://plot.ly/~ciivvi/128/" target="_blank" style="display: block; text-align: center;"><img src="https://plot.ly/~ciivvi/128.png" style="max-width: 32px;width: 32px;" width="32" onerror="this.onerror=null;this.src='https://plot.ly/404.png';"></a><br>    <script data-plotly="ciivvi:128" src="https://plot.ly/embed.js" async></script><br></div>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/06/05/Largest-Rectangle-in-Histogram-Show-result/" title="Largest Rectangle in Histogram Show result " itemprop="url">Largest Rectangle in Histogram Show result </a>
   </h1>
   <p class="article-author">By
@@ -96,8 +146,9 @@
 <li>exhaustive search: $O(N^2)$</li>
 <li>for element find boundary (width) — the continuous range within which heights are &gt;= element height. Boundaries can be found in O(1) time (check ex. <em>“get index of first smaller element to the left”</em>).</li>
 </ul>
-<p>Time: O(N), space: O(N).<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;height)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; left = getFirstSmallerElementIndexToLeft(height);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; right = getFirstSmallerElementIndexToRight(height);</span><br><span class="line">    <span class="keyword">int</span> maxArea = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; height.size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> area = (right[i] - left[i] - <span class="number">1</span>) * height[i];</span><br><span class="line">        maxArea = max(maxArea, area);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxArea;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> </p>
-<p>Time: O(N), space: O(1).</p>
+<p><strong>Exhaustive search</strong><br>Time: $O(N^2)$, space: $O(1)$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;height)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxArea = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; height.size(); l++) &#123;</span><br><span class="line">        <span class="keyword">int</span> minHeight = height[l];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> r = l; r &lt; height.size(); r++) &#123;</span><br><span class="line">            minHeight = min(minHeight, height[r]);</span><br><span class="line">            maxArea = max(maxArea, (r - l + <span class="number">1</span>) * minHeight);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxArea;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> </p>
+<p><strong>Bundary search 1</strong><br>Time: $O(N)$, space: $O(N)$.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;height)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; left = getFirstSmallerElementIndexToLeft(height);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; right = getFirstSmallerElementIndexToRight(height);</span><br><span class="line">    <span class="keyword">int</span> maxArea = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; height.size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> area = (right[i] - left[i] - <span class="number">1</span>) * height[i];</span><br><span class="line">        maxArea = max(maxArea, area);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxArea;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> </p>
+<p><strong>Bundary search 2</strong><br>Idea: search left boundary only - start from right boundary, search to the left and update max area.<br>Time: O(N), space: O(1).<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;height)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; left = getFirstSmallerElementIndexToLeft(height);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; right = getFirstSmallerElementIndexToRight(height);</span><br><span class="line">    <span class="keyword">int</span> maxArea = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; height.size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> area = (right[i] - left[i] - <span class="number">1</span>) * height[i];</span><br><span class="line">        maxArea = max(maxArea, area);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxArea;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> </p>
 
         
         
@@ -639,63 +690,6 @@
   
   <span></span> <a href="/tags/easy/">easy</a>
   </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/17/Minimum-Adjustment-Cost/" title="Minimum Adjustment Cost" itemprop="url">Minimum Adjustment Cost</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Patrick Cheng" target="_blank" itemprop="author">Patrick Cheng</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-17T22:15:35.000Z" itemprop="datePublished"> Published 2015-05-17</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <ul>
-<li><p>Time: $O(MNK)$. Space: $O(MNR)$, $R$ = range of A.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MinAdjustmentCost</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: min adjustment cost of &#123;A[0..i] and A[i] = j&#125;</span></span><br><span class="line">    <span class="comment">// f[i][j] = arg_x min&#123;f[i-1][x] + |A[i]-j|&#125;</span></span><br><span class="line">    <span class="comment">//           min search range abs(x-j) &lt;= target</span></span><br><span class="line">    <span class="keyword">int</span> N = A.size(), M = <span class="number">100</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(N, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(M + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M; j++) </span><br><span class="line">        f[<span class="number">0</span>][j] = <span class="built_in">abs</span>(A[<span class="number">0</span>] - j);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N; i++) </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M; j++) &#123;</span><br><span class="line">            f[i][j] = INT_MAX;   </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x = max(j - target, <span class="number">0</span>); x &lt;= min(j + target, M); x++) </span><br><span class="line">                f[i][j] = min(f[i][j], f[i-<span class="number">1</span>][x] + <span class="built_in">abs</span>(A[i] - j));</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">int</span> minCost = INT_MAX;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M; j++)</span><br><span class="line">        <span class="keyword">if</span> (f[N-<span class="number">1</span>][j] &lt; minCost)</span><br><span class="line">            minCost = f[N-<span class="number">1</span>][j];</span><br><span class="line">    <span class="keyword">return</span> minCost;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Time: $O(MNK)$. Space: $O(NR)$, $R$ = range of A.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MinAdjustmentCost</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// f[i][j]: min adjustment cost of &#123;A[0..i] and A[i] = j&#125;</span></span><br><span class="line">    <span class="comment">// f[i][j] = arg_x min&#123;f[i-1][x] + |A[i]-j|&#125;</span></span><br><span class="line">    <span class="comment">//           min search range abs(x-j) &lt;= target</span></span><br><span class="line">    <span class="keyword">int</span> N = A.size(), M = <span class="number">100</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; f(<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(M + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M; j++) </span><br><span class="line">        f[<span class="number">0</span>][j] = <span class="built_in">abs</span>(A[<span class="number">0</span>] - j);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N; i++) </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M; j++) &#123;</span><br><span class="line">            f[i%<span class="number">2</span>][j] = INT_MAX;   </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x = max(j - target, <span class="number">0</span>); x &lt;= min(j + target, M); x++) </span><br><span class="line">                f[i%<span class="number">2</span>][j] = min(f[i%<span class="number">2</span>][j], f[(i-<span class="number">1</span>)%<span class="number">2</span>][x] + <span class="built_in">abs</span>(A[i] - j));</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">int</span> minCost = INT_MAX;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M; j++)</span><br><span class="line">        <span class="keyword">if</span> (f[(N-<span class="number">1</span>)%<span class="number">2</span>][j] &lt; minCost)</span><br><span class="line">            minCost = f[(N-<span class="number">1</span>)%<span class="number">2</span>][j];</span><br><span class="line">    <span class="keyword">return</span> minCost;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
 
 </div>
 
