@@ -11,16 +11,27 @@
     
 
     
-    <meta name="description">
+    <meta name="description" content="LintCodeAnalysis
+
+find max element as root, recursively build LST and RST $\Rightarrow$ $O(N^2)$ in worst case.
+start with example: [2, 5, 6, 0, 3, 1]12345˙   6   / \  5   3 /   / \2   0   1 
+observat">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Max Tree">
 <meta property="og:url" content="/2015/06/05/Max-Tree/index.html">
 <meta property="og:site_name" content="Programming Exercise">
-<meta property="og:description">
-<meta property="og:image" content="https://plot.ly/~ciivvi/128.png">
+<meta property="og:description" content="LintCodeAnalysis
+
+find max element as root, recursively build LST and RST $\Rightarrow$ $O(N^2)$ in worst case.
+start with example: [2, 5, 6, 0, 3, 1]12345˙   6   / \  5   3 /   / \2   0   1 
+observat">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Max Tree">
-<meta name="twitter:description">
+<meta name="twitter:description" content="LintCodeAnalysis
+
+find max element as root, recursively build LST and RST $\Rightarrow$ $O(N^2)$ in worst case.
+start with example: [2, 5, 6, 0, 3, 1]12345˙   6   / \  5   3 /   / \2   0   1 
+observat">
 
     
     <link rel="alternative" href="/atom.xml" title="Programming Exercise" type="application/atom+xml">
@@ -97,7 +108,32 @@
 		
 		</div>
 		
-		<div><br>    <a href="https://plot.ly/~ciivvi/128/" target="_blank" style="display: block; text-align: center;"><img src="https://plot.ly/~ciivvi/128.png" style="max-width: 32px;width: 32px;" width="32" onerror="this.onerror=null;this.src='https://plot.ly/404.png';"></a><br>    <script data-plotly="ciivvi:128" src="https://plot.ly/embed.js" async></script><br></div>
+		<p><a href="http://lintcode.com/en/problem/max-tree/" target="_blank" rel="external">LintCode</a><br><strong>Analysis</strong></p>
+<ul>
+<li>find max element as root, recursively build LST and RST $\Rightarrow$ $O(N^2)$ in worst case.</li>
+<li>start with example: [2, 5, 6, 0, 3, 1]<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">˙   <span class="number">6</span></span><br><span class="line">   / \</span><br><span class="line">  <span class="number">5</span>   <span class="number">3</span></span><br><span class="line"> /   / \</span><br><span class="line"><span class="number">2</span>   <span class="number">0</span>   <span class="number">1</span></span><br></pre></td></tr></table></figure> </li>
+<li>observation: <ul>
+<li>select 6 as root, left child is the largest element to its left, right child is the largest element to its right.</li>
+<li>view 5, its parent is the first greater element to its right.</li>
+<li>view 3, its parent is the first greater element to its left.</li>
+<li>for a given element, its parent is the smaller between: first greater element to the left / right.</li>
+</ul>
+</li>
+<li>idea: bottom-up approach</li>
+<li>another idea:<ul>
+<li>if curVal &lt; preVal, preNode-&gt;right = curNode</li>
+<li>if curVal &gt; preVal, trace back till curVal &lt; nodeVal, set node-&gt;right = curNode, RSL of node be LST of curNode.</li>
+<li>need to maintain a stack of path to root.</li>
+</ul>
+</li>
+</ul>
+<p>Time: O(N), space: O(N) worst case<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">TreeNode* maxTree(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A) &#123;</span><br><span class="line">    <span class="keyword">if</span> (A.empty()) <span class="keyword">return</span> NULL;</span><br><span class="line">	<span class="built_in">stack</span>&lt;TreeNode *&gt; st;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.size(); i++) &#123;</span><br><span class="line">		TreeNode *node = <span class="keyword">new</span> TreeNode(A[i]);</span><br><span class="line">		<span class="keyword">if</span> (!st.empty() &amp;&amp; A[i] &lt; st.top()-&gt;val) &#123;</span><br><span class="line">		    st.top()-&gt;right = node;</span><br><span class="line">	    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	        TreeNode *preNode = NULL;</span><br><span class="line">	        <span class="keyword">while</span> (!st.empty() &amp;&amp; A[i] &gt; st.top()-&gt;val) &#123;</span><br><span class="line">	            preNode = st.top();</span><br><span class="line">	            st.pop();</span><br><span class="line">	        &#125;</span><br><span class="line">	        <span class="keyword">if</span> (!st.empty()) </span><br><span class="line">	            st.top()-&gt;right = node;</span><br><span class="line">	        node-&gt;left = preNode;</span><br><span class="line">	    &#125;</span><br><span class="line">	    st.push(node);</span><br><span class="line">	&#125;</span><br><span class="line">	TreeNode *root = NULL;</span><br><span class="line">	<span class="keyword">while</span> (!st.empty()) &#123;</span><br><span class="line">	    root = st.top();</span><br><span class="line">	    st.pop();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> </p>
+<p><strong>Improvement</strong> </p>
+<ul>
+<li>remove if / else redundancy</li>
+<li>adopt vector instead of stack<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">TreeNode* maxTree(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A) &#123;</span><br><span class="line">    <span class="keyword">if</span> (A.empty()) <span class="keyword">return</span> NULL;</span><br><span class="line">	<span class="built_in">vector</span>&lt;TreeNode *&gt; st(A.size(), <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.size(); i++) &#123;</span><br><span class="line">		TreeNode *node = <span class="keyword">new</span> TreeNode(A[i]);</span><br><span class="line">        TreeNode *preNode = NULL;</span><br><span class="line">        <span class="keyword">while</span> (cnt &gt; <span class="number">0</span> &amp;&amp; A[i] &gt; st[cnt - <span class="number">1</span>]-&gt;val) </span><br><span class="line">            preNode = st[(cnt--)-<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (cnt &gt; <span class="number">0</span>)</span><br><span class="line">            st[cnt - <span class="number">1</span>]-&gt;right = node;</span><br><span class="line">        node-&gt;left = preNode;</span><br><span class="line">        st[cnt++] = node;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> st[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+</li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
